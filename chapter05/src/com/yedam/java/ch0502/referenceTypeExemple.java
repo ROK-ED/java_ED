@@ -24,11 +24,7 @@ public class referenceTypeExemple {
 		int[] scores1;
 		
 		// 변수 선언후 추가 선언 방법
-		scores1 = new int[] { 83, 90, 87 };
-
-		for (int i = 0; i < 3; i++) {
-			System.out.println("scores1[" + i + "]=" + scores[i]);
-		}
+		
 		
 		int resulrt = add(new int[] { 83, 90, 87 });
 		//int resulrt = add({ 83, 90, 87 }); //new int[]로 추가되는 변수 타입 결정
