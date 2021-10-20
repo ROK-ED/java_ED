@@ -33,9 +33,15 @@ public class A03 {
 				System.out.println("3사분면");
 			} 
 			
-		} else {
-			System.out.println("0입력");
-		}
+		} 
+//		else {
+//			System.out.println("0입력");
+//		}             예외 되는 경우가 있어서 안됨
+		
+		if (x>0 && y>0) {
+			System.out.println("1사분면");
+		} 
+//		else if {} 이런식으로 표현가능
 		
 		
 		System.out.println("문제2");
@@ -53,6 +59,16 @@ public class A03 {
 				System.out.println(Y+"년은 4의 배수 이면서 100의 배수가 아닌 윤년");
 			} if(Y%400==0) {
 				System.out.println(Y+"년은 4의 배수 이면서 400의 배수인 윤년");
+			}
+		} else {
+			System.out.println(Y+"년은 윤년이 아닙니다.");
+		}
+		
+		if (Y%4==0) {
+			if(Y%100!=0 || Y%400==0) {
+				System.out.println(Y+"년은 윤년입니다.");
+			} else {
+				System.out.println(Y+"년은 윤년이 아닙니다.");
 			}
 		} else {
 			System.out.println(Y+"년은 윤년이 아닙니다.");
@@ -98,8 +114,8 @@ public class A03 {
 		//				2 X 2 = 4
 		//				2 X 3 = 6 
 		
-		int m = 4;
-		int n = 9;
+		int m = scanner.nextInt();
+		int n = scanner.nextInt();
 		
 		for (int i=1; i<=n; i++) {
 			System.out.println(m+" X "+i+" = "+ (m*i));
