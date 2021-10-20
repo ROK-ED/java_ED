@@ -45,8 +45,8 @@ public class variableExample {
         
         System.out.println("f1:" + f1 + ", d1: " + d1);
         System.out.println("varF:" + varF + ", varD: " + varD); 
-        
-        boolean stop = true;
+ */       
+        boolean stop = false;
         if(stop) {
         	System.out.println("중지합니다");
         }
@@ -56,7 +56,7 @@ public class variableExample {
         	System.out.println("중지합니다");
         }
        
-*/       
+       
        
         
     int var1 =200;
