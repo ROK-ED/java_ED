@@ -40,6 +40,7 @@ public class conditionalStatementExample {
 			
 			tree += "*";
 			System.out.println(tree);
+
 			// i = 1;
 			// 실행문 실행
 			// 증감연산식 i++ -> i=2
@@ -58,7 +59,7 @@ public class conditionalStatementExample {
 			// i<=5 ->조건확인 -> 3<=5 -> FALSE
 			// for문이 종료
 		}
-		
+
 	}
 
 }
