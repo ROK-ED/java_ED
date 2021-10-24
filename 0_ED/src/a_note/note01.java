@@ -371,11 +371,112 @@ System.out.println("============================================================
 			}
 			System.out.println(I);
 		}
-				
-		
-		
-		
 System.out.println("====================================================================================================");
+//05 참조타입
+//  05-01 참조 타입과 참조 변수 p.164
+		String strValue1 = "신미철";
+		String strValue2 = "신미철";
+
+		if(strValue1 == strValue2) {
+			System.out.println("strValue1 과 strValue2는 참조가 같음");
+		} else {
+			System.out.println("strValue1 과 strValue2는 참조가 다름");
+		}
+
+		String strValue3 = new String("신미철");
+		String strValue4 = new String("신미철");
+
+		if(strValue3 == strValue4) {
+			System.out.println("strValue3 과 strValue4는 참조가 같음");
+		} else {
+			System.out.println("strValue3 과 strValue4는 참조가 다름");
+		}
+		if(strValue3.equals(strValue4)) {                                      //값이 같은지 확인하는 함수
+			System.out.println("strValue3 과 strValue4는 문자열이 같음");
+		}
+System.out.println("====================================================================================================");
+// 05-02 배열 p.177
+		// int[]scores = new int[3]; // |0|0|0| 3개의 공간만이 생김 int 지정안해서
+		int[] scores = { 83, 90, 87 };
+
+		System.out.println("scores[0] : " + scores[0]);
+		System.out.println("scores[1] : " + scores[1]);
+		System.out.println("scores[2] : " + scores[2]);
+
+		int sum0502 = 0;
+	    //for(int i=0; i<=3; i++) { //오류코드 Index 3 out of bounds for length 3 인덱스보다 값이
+		// 초과한다
+		for (int i = 0; i < 3; i++) {
+			sum0502 += scores[i];
+		}
+
+		System.out.println("총합 :" + sum0502);
+		double avg0502 = (double) sum0502 / 3;
+		System.out.println("평균 :" + avg0502);
+
+		int[] scores1;
+		
+		// 변수 선언후 추가 선언 방법
+		
+		
+//		int resulrt = add(new int[] { 83, 90, 87 });
+		//int resulrt = add({ 83, 90, 87 }); //new int[]로 추가되는 변수 타입 결정
+
+		// 다차원 배열
+		int[][] scores0502 = new int[2][3];
+		
+		int[] score050201 = new int[3];
+		int[] score050202 = new int[3];
+		// int[] ->타입
+		
+		//int[][] scoreArray = new int[][2];
+		//scoreArray[0] = score1;
+		
+		int[][] mathScores = new int[2][3];
+		System.out.println(mathScores);
+		
+		for(int x=0; x<mathScores.length; x++) {
+		    System.out.println(mathScores[x]);
+			int[] temp = mathScores[x];
+			for(int y=0; y<temp.length; y++) {
+				System.out.println(temp[y]);
+			}
+		}
+
+		for(int x=0; x<mathScores.length; x++) {
+		    System.out.println(mathScores[x]);
+			//int[] temp = mathScores[x];
+			for(int y=0; y<mathScores[x].length; y++) {
+				System.out.println(mathScores[x][y]);
+			}
+		}
+		
+		System.out.println();
+		
+		int[][] englichScores = new int[2][];
+		//englichScores[0] //null
+
+		englichScores[0] = new int[5];
+		englichScores[1] = new int[3];
+		
+		System.out.println(englichScores.length);
+		for(int x=0; x<englichScores.length; x++) {
+			System.out.println();
+			System.out.println(englichScores[x].length);
+			for(int y=0; y<englichScores[x].length; y++) {
+				System.out.println(englichScores[x][y]);
+				
+			}
+		}
+
+
+
+
+
+
+
+
+
 
 	}
 

@@ -11,7 +11,7 @@ public class referenceTypeExemple {
 		System.out.println("scores[2] : " + scores[2]);
 
 		int sum = 0;
-		// for(int i=0; i<=3; i++) ~~오류코드 Index 3 out of bounds for length 3 인덱스보다 값이
+	    //for(int i=0; i<=3; i++) { //오류코드 Index 3 out of bounds for length 3 인덱스보다 값이
 		// 초과한다
 		for (int i = 0; i < 3; i++) {
 			sum += scores[i];

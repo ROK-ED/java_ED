@@ -22,6 +22,8 @@ public class shortcutKeys {
 //      // 0.0 * 10 <= Math.random() * 10 < 1.0 * 10
 //      // (int) 0 <= (int) Math.random() * 10 < (int) 10
 //      // (int) 0 + 1 <= (int) Math.random() * 10 + 1 < (int) 10 + 1
+        System.exit(0);       //시스템 강제종료
+
       
 	}
 
