@@ -239,7 +239,7 @@ System.out.println("============================================================
 		} 
 System.out.println("====================================================================================================");
 //  04-02 반복문: for문, while문, do-while문 p.148
-		//for문
+		// for문
 		for(int i=1; i<=10; i++) { 
 			//for 문 안에 i선언
             //int i=0; i<0; i++
@@ -253,7 +253,7 @@ System.out.println("============================================================
             sum += i;
         }
         System.out.println(sum);
-        //나무
+        //  나무
 		String tree0402 = "";
 		for (int i=1; i<=5; i++) {
 			
@@ -277,8 +277,103 @@ System.out.println("============================================================
 			// i<=5 ->조건확인 -> 3<=5 -> FALSE
 			// for문이 종료
 		}
+		// 중첩 for문
+		// 2 X 1 = 2
+		// 2 X 2 = 4
+		// ....
+		// 2 X 9 = 18
+		// 단이 없지만 단이 있다고 생각
+		// -> 2 X n = 2 * n
+		// --> for문
+		// 3 X 1 = 3
+		// 3 X 2 = 6
+		// ---> 2 ~ 9단 까지 for문
+		// ----> for문
+		for (int i = 2; i <= 9; i++) {
+			for (int j = 1; j <= 9; j++) {
+				System.out.println(i + "X" + j + "=" + i * j);
+			}
+		}
 		
+		// while 문
+		//  1 부터 10까지 출력
+		
+		int m0402=1;
+		while(m0402<=10) {
+			System.out.println(m0402);
+			m0402++;
+		}
+		
+		//  1부터 100까지 합
+		int sum0402 = 0;
+		int i0402 = 0;
+		while (i0402<=100) {
+			sum0402 +=i0402;
+			i0402++;
+			//sum0402 = sum0402 + i0402++; 이것도 가능
+		}
+		System.out.println(sum0402);
+		
+		// do -while문
+		int index = 1;
+		while( index!=1 ) {
+			System.out.println("while 반복문이 "+ index + "번 실행됩니다.");
+		}
+		do {
+			System.out.println("do~while 반복문이"+ index + "번 실행됩니다.");
+		} while(index != 1);
+		// 1부터 100 까지합
+		int sum040202 = 0;
+		int i040202 = 0;
+		do {
+			sum040202 += i040202;
+			i040202++;
+		} while(i040202<=100);
+		System.out.println("1~"+(i040202-1)+" 합 : "+sum040202);
+		
+		// break문
+		//  무한루프의 이용 ~ 조건을 줄때 몇번줄지 모를경우 사용
+		//  주사위를 던지다 6이 나오면 종료하는 조건식
+		while(true) {
+			int num = (int)(Math.random()*6)+1;
+//			System.out.println(num);
+			if(num == 6) {
+				break;
+			}
+		}
+		
+		for(char upper = 'A'; upper<='Z'; upper++) {
+			for(char lower = 'a'; lower<='z'; lower++) {
+//				System.out.println(upper+"-"+lower);
+				if(lower=='g') {
+					break;
+				}
+			}
+		}
 
+		//  Label p.157
+		Outter:for(char upper = 'A'; upper<='Z'; upper++) {
+			for(char lower = 'a'; lower<='z'; lower++) {
+//				System.out.println(upper+"-"+lower);
+				if(lower=='g') {
+					break Outter;
+				}
+			}
+		}
+		
+		// continue p.158
+		
+		// 10보다 작은 홀수 출력
+		for(int I=1; I<=10; I++) {
+			if(I%2==0) {    //짝수인경우
+				continue;
+				
+			}
+			System.out.println(I);
+		}
+				
+		
+		
 		
 System.out.println("====================================================================================================");
 

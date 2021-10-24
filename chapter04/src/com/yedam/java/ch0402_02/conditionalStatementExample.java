@@ -18,7 +18,7 @@ public class conditionalStatementExample {
 
 		for (int i = 2; i <= 9; i++) {
 			for (int j = 1; j <= 9; j++) {
-//				System.out.println(i + "X" + j + "=" + i * j);
+				System.out.println(i + "X" + j + "=" + i * j);
 			}
 		}
 		
@@ -40,15 +40,15 @@ public class conditionalStatementExample {
 			//sum = sum + i++; 이것도 가능
 		}
 //		System.out.println(sum);
-		
+System.out.println("================================================================");		
 		// do -while문
 		int index = 1;
 		
 		while( index!=1 ) {
-//			System.out.println("while 반복문이 "+ index + "번 실행됩니다.");
+			System.out.println("while 반복문이 "+ index + "번 실행됩니다.");
 		}
 		do {
-//			System.out.println("do~while 반복문이"+ index + "번 실행됩니다.");
+			System.out.println("do~while 반복문이"+ index + "번 실행됩니다.");
 		} while(index != 1);
 		
 		// 무한루프의 이용 ~ 조건을 줄때 몇번줄지 모를경우 사용
@@ -86,7 +86,9 @@ public class conditionalStatementExample {
 		// 10보다 작은 홀수 출력
 		for(int I=1; I<=10; I++) {
 			if(I%2==0) {    //짝수인경우
+
 				continue;
+				
 			}
 			System.out.println(I);
 		}
