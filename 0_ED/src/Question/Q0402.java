@@ -84,7 +84,7 @@ public class Q0402 {
 
 //          피라미드 성공
 			String tree3 = "";
-			int q = 7;
+			int q = 5;
 			
 			
 			for(int x=1; x<=q; x++) {
