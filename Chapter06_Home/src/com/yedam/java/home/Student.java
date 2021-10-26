@@ -46,7 +46,7 @@ public class Student {
 		for(int i=0; i<subjectIndex; i++) {
 			sum += subjectList[i].getScorePoint();
 		}
-		System.out.printf("학생 %s의 총점은 %d점 입니다.\n",studentName,sum);
+		System.out.printf("학생 %의 총점은 %d점 입니다.\n",studentName,sum);
 		
 	}
 	
