@@ -16,7 +16,13 @@ public class Subject {
 		return scorePoint;
 	}
 	public void setScorePoint(int scorePoint) {
-		this.scorePoint = scorePoint;
+		if (scorePoint < 0) {
+			this.scorePoint = 0;
+			return;
+		} else {
+			this.scorePoint = scorePoint;
+			return;
+		}
 		
 		
 	}
