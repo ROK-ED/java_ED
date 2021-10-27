@@ -23,6 +23,8 @@ public class shortcutKeys {
 //      // (int) 0 <= (int) Math.random() * 10 < (int) 10
 //      // (int) 0 + 1 <= (int) Math.random() * 10 + 1 < (int) 10 + 1
         System.exit(0);       //시스템 강제종료
+        
+//      this.  ~인스턴스의 메모리 
 
       
 	}
