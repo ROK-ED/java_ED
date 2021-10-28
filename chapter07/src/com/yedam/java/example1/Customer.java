@@ -3,20 +3,31 @@ package com.yedam.java.example1;
 public class Customer {
 	//필드
 	//고객 아이디
-	private int customerId;
+	protected int customerId;
 	//고객 이름
-	private String customerName;
+	protected String customerName;
 	//고객 등급 (
-	private String customerGrade;
+	protected String customerGrade;
 	//보너스 포인트
-	private int bonusPoint;
+	protected int bonusPoint;
 	//보너스 적립 비율
-	private double bonusRatio;
+	protected double bonusRatio;
 	
 	//생성자
 	public Customer() {
 		this.customerGrade = "SILVER"; //기본 등급
 	    this.bonusRatio = 0.01;       //기본 등급일 경우 보너스 적립비용은 1%
+	    System.out.println("Customer() 생성자 호출");
+	}
+	
+	public Customer(String customerName, int customerId) {
+//		this(); //생성자를 호출할려면 첫줄에서 해야됨
+		this.customerName = customerName;
+		this.customerId = customerId;
+		this.customerGrade = "SILVER"; //기본 등급
+	    this.bonusRatio = 0.01;       //기본 등급일 경우 보너스 적립비용은 1%
+	    System.out.println("Customer(String, int) 생성자 호출");
+		
 	}
 
 	//메소드
