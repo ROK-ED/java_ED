@@ -2,11 +2,11 @@ package com.yedam.java.example2;
 
 public class Player {
 	//필드
-	private PlyaerLevel level;
+	private PlayerLevel level;
 	
 	//생성자
-	public Plyaer() {
-		level = new BeginnerLevel();
+	public Player() {
+		level = new BiginnerLevel();
 		level.showLevelMessage();
 	}
 	
