@@ -1,6 +1,6 @@
 package a_note;
 
-public class shortcutKeys {
+public class ShortcutKeys {
 
 	public static void main(String[] args) {
 		System.out.println("System.out.println -> syso + Ctrl + Shift + Enter 자동완성");

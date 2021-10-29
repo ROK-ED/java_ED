@@ -2,7 +2,7 @@ package a_note;
 
 import java.util.Scanner;
 
-public class note01 {
+public class Note01 {
 
 	public static void main(String[] args) {
 System.out.println("====================================================================================================");
