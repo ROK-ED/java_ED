@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="0_ED/src"/>
+	<classpathentry kind="src" path="20211007/src"/>
+	<classpathentry kind="src" path="211014/src"/>
+	<classpathentry kind="src" path="chapter02/src"/>
+	<classpathentry kind="src" path="chapter03/src"/>
+	<classpathentry kind="src" path="chapter04/src"/>
+	<classpathentry kind="src" path="chapter05/src"/>
+	<classpathentry kind="src" path="chapter06_AccessModifiter/src"/>
+	<classpathentry kind="src" path="chapter06_Example/src"/>
+	<classpathentry kind="src" path="Chapter06_Home/src"/>
+	<classpathentry kind="src" path="chapter06_Review/src"/>
+	<classpathentry kind="src" path="chapter06/src"/>
+	<classpathentry kind="src" path="chapter07/src"/>
+	<classpathentry kind="src" path="chapter08/src"/>
+	<classpathentry kind="src" path="exam_SED/src"/>
+	<classpathentry kind="src" path="Exam1/src"/>
+	<classpathentry kind="src" path="Exam2/src"/>
+	<classpathentry kind="src" path="test01_02/src"/>
+	<classpathentry kind="src" path="test01/src"/>
+	<classpathentry kind="output" path="0_ED/bin"/>
+</classpath>

@@ -25,6 +25,30 @@ public class ShortcutKeys {
         System.exit(0);       //시스템 강제종료
         
 //      this.  ~인스턴스의 메모리 
+        
+     // System.arraycopy();  ~배열 복사 시스템 언어
+     		String[] oldStrArray = {"java","array","copy"};
+     		String[] newStrArray = new String[5];
+     		System.arraycopy(oldStrArray, 0, newStrArray, 0, oldStrArray.length);
+     		
+     		for(int i=0; i<newStrArray.length; i++) {
+     			System.out.println(newStrArray[i]);
+     		}
+     		
+     		
+     		//향상된 for문
+     		int[] scoresList = {95,71,84,93,87};
+     		
+     		
+     		int sum = 0;
+     		for(int score : scoresList) {
+     			System.out.println(score);
+     			sum += score;
+     		}
+     		System.out.println("총합: "+sum);
+     		
+     		double avg = (double) sum/ scoresList.length;
+     		System.out.println("평균: "+avg);
 
       
 	}
