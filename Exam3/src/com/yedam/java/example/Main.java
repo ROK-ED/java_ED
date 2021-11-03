@@ -16,6 +16,11 @@ public class Main {
 		
 		//회원 등급에 맞는 카드의 객체를 생성한다. instanceof
 		Payment myCard = null;
+		if( member instanceof Gold ) {
+			myCard = new VIPCard();
+		} else {
+			myCard = new GreenCard();
+		}
 		
 		
 		System.out.println("=== 등급에 따른 카드 사용시 결제 예상금액 ===");

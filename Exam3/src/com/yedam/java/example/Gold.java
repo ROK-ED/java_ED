@@ -1,8 +1,10 @@
 package com.yedam.java.example;
 
 public class Gold extends Member{
-	private double saleRatio;
-	
-	public Gold(String )
 
-}
+	public Gold(int record) {
+		super(record);
+		grade="GOLD";
+	}
+
+	}
