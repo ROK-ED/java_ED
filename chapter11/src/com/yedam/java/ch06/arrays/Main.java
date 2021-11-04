@@ -73,6 +73,41 @@ public class Main {
 			System.out.println(name);
 		}
 		
+		Member m1 = new Member("홍길동");
+		Member m2 = new Member("박동수");
+		Member m3 = new Member("김미수");
+		
+		Member[] members = {m1, m2, m3};
+		Arrays.sort(members);
+		for(Member member : members) {
+			System.out.println(member);
+		}
+		
+		System.out.println();
+		
+		// 배열 항목 검색 : 배열 항목에서 특정 값이 위치한 인덱스를 얻는 것
+		// Arrays.sort() 정렬 후 Arrays.binarySearch() 항목 찾음
+		
+		int[] scores1 = { 99, 97, 98 };
+		Arrays.sort(scores1);
+		int index = Arrays.binarySearch(scores1, 99);
+		System.out.println("찾은 인덱스 : "+index);
+		
+		String[] names1 = {"홍길동","박동수","김민수"};
+		Arrays.sort(names1);
+		index = Arrays.binarySearch(names1, "홍길동");
+		System.out.println("찾은 인덱스 : "+index);
+		
+		Member m4 = new Member("홍길동");
+		Member m5 = new Member("박동수");
+		Member m6 = new Member("김미수");
+		Member[] memberList = {m4,m5,m6};
+		Arrays.sort(memberList);
+		index = Arrays.binarySearch(memberList, m6);  //여기선 이름 넣으면 안됨
+		System.out.println("찾은 인덱스 : "+index);
+		
+		
+		
 	}
 
 }
