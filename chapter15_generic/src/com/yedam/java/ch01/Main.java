@@ -9,12 +9,14 @@ public class Main {
 		Box<String> box1 = new Box<String>();
 		box1.set("홍길동");
 		String name = box1.get();
+		System.out.println(box1.get());
 		
 		//box.set(new Apple());
 		//Apple apple = (Apple)box.get();
 		Box<Apple> box2 = new Box<Apple>();
 		box2.set(new Apple());
 		Apple apple = box2.get();
+		
 
 		Printer<Powder> powderPrinter = new Printer<Powder>();
 		powderPrinter.setMaterial(new Powder());
