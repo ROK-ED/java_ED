@@ -7,12 +7,7 @@ import java.util.Scanner;
 public class EmpApp {
 
 	public static void main(String[] args) {
-/*		EmpDAO dao = EmpDAO.getInstance();
-		List<Emp> datas = dao.selectAll();
-		for(Emp emp: datas) {
-			System.out.println(emp);
-		}
-*/
+
 		Scanner scanner = new Scanner(System.in);
 		boolean run = true;
 		
