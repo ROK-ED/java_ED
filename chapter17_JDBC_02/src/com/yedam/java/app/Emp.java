@@ -103,4 +103,12 @@ public class Emp {
 		this.departmentId = departmentId;
 	}
 
+	@Override
+	public String toString() {
+		return "Emp [employeeId=" + employeeId + ", firstName=" + firstName + ", lastNae=" + lastNae + ", email="
+				+ email + ", phoneNumber=" + phoneNumber + ", hireDate=" + hireDate + ", jobId=" + jobId + ", salary="
+				+ salary + ", commissionPct=" + commissionPct + ", managerId=" + managerId + ", departmentId="
+				+ departmentId + "]";
+	}
+
 }

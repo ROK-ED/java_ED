@@ -21,6 +21,18 @@ public class EmpDAO {
 	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	
+	// 실글톤 ~ 없어도 상관은 없으나 하나의 클래스로 구현화 해서 싱글톤은 씀
+	private static EmpDAO empDAO = null;
+	
+	private EmpDAO() {}
+	
+	public static EmpDAO getInstance() {
+		if(empDAO == null) {
+			empDAO = new EmpDAO();
+		}
+		return empDAO;
+	}
 
 	// DB 연결하기
 	public void connect() {
@@ -95,7 +107,7 @@ public class EmpDAO {
 	// 조회 - 단건조회 or 상세조회
 	public Emp selectOne(int employeeId) {
 		// 값을 답을 변수 선언
-		Emp emp = new Emp();
+		Emp emp = null;//**이렇게 바꿔야 사원이없을때를 상정할수 있다.
 		try {
 			// DB 연결하기
 			connect();
@@ -105,6 +117,7 @@ public class EmpDAO {
 			String select = "select * from employees where employee_id = " + employeeId;
 			rs = stmt.executeQuery(select);
 			if (rs.next()) {
+				emp = new Emp();//**이렇게 바꿔야 사원이없을때를 상정할수 있다.
 				emp.setEmployeeId(rs.getInt("employee_id"));
 				emp.setFirstName(rs.getString("first_name"));
 				emp.setLastNae(rs.getString("last_name"));
@@ -116,19 +129,17 @@ public class EmpDAO {
 				emp.setCommissionPct(rs.getDouble("commission_pct"));
 				emp.setManagerId(rs.getInt("manager_id"));
 				emp.setDepartmentId(rs.getInt("department_id"));
-				
-				
-				
-			} 
+
+			}
 		} catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
 		} finally {
 			// 자원 해제 하기
-			
+
 			disconnect();
 		}
 
-		return emp; ///계속 써먹을려고 리턴하는건가?
+		return emp; /// 계속 써먹을려고 리턴하는건가?
 
 	}
 
@@ -166,7 +177,47 @@ public class EmpDAO {
 	}
 
 	// 수정
+	public void update(Emp emp) {
+		try {
+			connect();
 
+			String update = "update employees set last_name = ? where employee_id = ?";
+			pstmt = conn.prepareStatement(update);
+			pstmt.setString(1, emp.getLastNae());
+			pstmt.setInt(2, emp.getEmployeeId());
+
+			int result = pstmt.executeUpdate();
+
+			System.out.println( result + "건이 완료되었습니다.");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+	}
+
+	// 삭제
+	public void delete(int employeeId) {
+		try {
+			connect();
+
+			//각 메소드별 코드를 구현
+			String delete = "delete from employees where employee_id = ?";
+			pstmt = conn.prepareStatement(delete);
+			pstmt.setInt(1, employeeId);
+
+			int result = pstmt.executeUpdate();
+			System.out.println( result + "건이 완료되었습니다.");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+	}
+
+	// 실험
 	public void a() {
 		try {
 			connect();
@@ -185,6 +236,4 @@ public class EmpDAO {
 			disconnect();
 		}
 	}
-
-	// 삭제
 }
