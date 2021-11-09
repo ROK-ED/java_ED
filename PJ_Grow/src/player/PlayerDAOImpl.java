@@ -4,22 +4,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yedam.app.product.Product;
+
 
 import common.DAO;
 import oracle.sql.DATE;
 
 public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	//사용할 SQL 정리
-	private final String SELECT_ALL = "select * from palyerstatus order by id";
-	private final String SELECT_ONE = "select * from palyerstatus where id = ?";
-	private final String INSERT = "insert into palyerstatus values(?,?,?,?,?,?)";//?두개 삭제함
-    private final String HP_UPDATE = "update palyerstatus set hp = ? where id = ?";
-    private final String ATK_UPDATE = "update palyerstatus set atk = ? where id = ?";
-    private final String DEF_UPDATE = "update palyerstatus set def = ? where id = ?";
-    private final String FLOOR_UPDATE = "update palyerstatus set nowfloor = ? where id = ?";
+	private final String SELECT_ALL = "select * from palyer order by id";
+	private final String SELECT_ONE = "select * from palyer where id = ?";
+	private final String INSERT = "insert into palyer values(?,?,?,?,?,?)";//?두개 삭제함
+    private final String HP_UPDATE = "update palyer set hp = ? where id = ?";
+    private final String ATK_UPDATE = "update palyer set atk = ? where id = ?";
+    private final String DEF_UPDATE = "update palyer set def = ? where id = ?";
+    private final String FLOOR_UPDATE = "update palyer set nowfloor = ? where id = ?";
 //    private final String ENDDATE_UPDATE = "update palyerstatus set endDate = ? where id = ?";
-    private final String DELETE = "delete from palyerstatus where id = ?";
+    private final String DELETE = "delete from palyer where id = ?";
 	
     //싱글톤
 	private static PlayerDAO instance = new PlayerDAOImpl();
@@ -29,28 +29,27 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public List<PlayerStatus> playerSelectAll() {
+	public List<Player> playerSelectAll() {
 		//전체플레이어확인
-		List<PlayerStatus> list = new ArrayList<>();
+		List<Player> list = new ArrayList<>();
 		try {
 			connect();
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(SELECT_ALL);
 			while (rs.next()) {
-				PlayerStatus playerStatus = new PlayerStatus();
-				playerStatus.setPlayerId(rs.getInt("id"));
-				playerStatus.setPlayerName(rs.getString("name"));
-				playerStatus.setPlayerHP(rs.getInt("hp"));
-				playerStatus.setPlayerATK(rs.getInt("ATK"));
-				playerStatus.setPlayerDEF(rs.getInt("def"));
-				playerStatus.setPlayerFloor(rs.getInt("floor"));
+				Player player = new Player();
+				player.setPlayerId(rs.getInt("id"));
+				player.setPlayerName(rs.getString("name"));
+				player.setPlayerHP(rs.getInt("hp"));
+				player.setPlayerATK(rs.getInt("atk"));
+				player.setPlayerDEF(rs.getInt("def"));
+				player.setPlayerFloor(rs.getInt("nowfloor"));
 //				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
 //				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
 				
-				list.add(playerStatus);
+				list.add(player);
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,9 +60,9 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public PlayerStatus playerSelect(int playerId) {
-		//단일플레이어조회
-		PlayerStatus playerStatus = null;
+	public Player playerSelect(int playerId) {
+		//단일플레이어확인
+		Player player = null;
 		try {
 			connect();
 			
@@ -72,40 +71,39 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				playerStatus = new PlayerStatus();
-				playerStatus.setPlayerId(rs.getInt("id"));
-				playerStatus.setPlayerName(rs.getString("name"));
-				playerStatus.setPlayerHP(rs.getInt("hp"));
-				playerStatus.setPlayerATK(rs.getInt("ATK"));
-				playerStatus.setPlayerDEF(rs.getInt("def"));
-				playerStatus.setPlayerFloor(rs.getInt("floor"));
+				player = new Player();
+				player.setPlayerId(rs.getInt("id"));
+				player.setPlayerName(rs.getString("name"));
+				player.setPlayerHP(rs.getInt("hp"));
+				player.setPlayerATK(rs.getInt("atk"));
+				player.setPlayerDEF(rs.getInt("def"));
+				player.setPlayerFloor(rs.getInt("floor"));
 //				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
 //				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
 	    		}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			disconnect();
 		}
-		return null;
+		return player;
 	}
 
 	@Override
-	public int playerInsert(PlayerStatus playerStatus) {
+	public int playerInsert(Player player) {
 		//등록
 		int result = 0;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(INSERT);
-			pstmt.setInt(1, playerStatus.getPlayerId());
-			pstmt.setString(2, playerStatus.getPlayerName());
-			pstmt.setInt(3, playerStatus.getPlayerHP());
-			pstmt.setInt(4, playerStatus.getPlayerATK());
-			pstmt.setInt(5, playerStatus.getPlayerDEF());
-			pstmt.setInt(6, playerStatus.getPlayerFloor());
+			pstmt.setInt(1, player.getPlayerId());
+			pstmt.setString(2, player.getPlayerName());
+			pstmt.setInt(3, player.getPlayerHP());
+			pstmt.setInt(4, player.getPlayerATK());
+			pstmt.setInt(5, player.getPlayerDEF());
+			pstmt.setInt(6, player.getPlayerFloor());
 //			pstmt.setDate(7, playerStatus.getPlayerCreDate());
 //			pstmt.setDate(8, playerStatus.getPlayerEndDate());
 			
@@ -122,15 +120,15 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 
 
 	@Override
-	public int playerHPUpdate(PlayerStatus playerStatus) {
+	public int playerHPUpdate(Player player) {
 		//수정 : HP
 		int result = 0;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(HP_UPDATE);
-			pstmt.setInt(1, playerStatus.getPlayerHP());
-			pstmt.setInt(2, playerStatus.getPlayerId());
+			pstmt.setInt(1, player.getPlayerHP());
+			pstmt.setInt(2, player.getPlayerId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -143,15 +141,15 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int playerATKUpdate(PlayerStatus playerStatus) {
+	public int playerATKUpdate(Player player) {
 		//수정 : ATK
 		int result = 0;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(ATK_UPDATE);
-			pstmt.setInt(1, playerStatus.getPlayerATK());
-			pstmt.setInt(2, playerStatus.getPlayerId());
+			pstmt.setInt(1, player.getPlayerATK());
+			pstmt.setInt(2, player.getPlayerId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -164,15 +162,15 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int playerDEFUpdate(PlayerStatus playerStatus) {
+	public int playerDEFUpdate(Player player) {
 		//수정 : DEF
 		int result = 0;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(DEF_UPDATE);
-			pstmt.setInt(1, playerStatus.getPlayerDEF());
-			pstmt.setInt(2, playerStatus.getPlayerId());
+			pstmt.setInt(1, player.getPlayerDEF());
+			pstmt.setInt(2, player.getPlayerId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -185,15 +183,15 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int playerNowFloorUpdate(PlayerStatus playerStatus) {
+	public int playerNowFloorUpdate(Player player) {
 		//수정 : floor
 		int result = 0;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(FLOOR_UPDATE);
-			pstmt.setInt(1, playerStatus.getPlayerFloor());
-			pstmt.setInt(2, playerStatus.getPlayerId());
+			pstmt.setInt(1, player.getPlayerFloor());
+			pstmt.setInt(2, player.getPlayerId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -246,6 +244,5 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 		}
 	}
 
-	
 
 }

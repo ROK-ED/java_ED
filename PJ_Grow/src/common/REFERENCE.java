@@ -1,21 +1,18 @@
 package common;
 
-import java.sql.SQLException;
-
-import oracle.sql.DATE;
-import player.PlayerStatus;
-
 public class REFERENCE {
 	
-	private final String SELECT_ALL = "select * from palyerstatus order by id";
-	private final String SELECT_ONE = "select * from palyerstatus where id = ?";
-	private final String INSERT = "insert into palyerstatus values(?,?,?,?,?,?,?,?)";
-    private final String HP_UPDATE = "update palyerstatus set hp = ? where id = ?";
-    private final String ATK_UPDATE = "update palyerstatus set atk = ? where id = ?";
-    private final String DEF_UPDATE = "update palyerstatus set def = ? where id = ?";
-    private final String FLOOR_UPDATE = "update palyerstatus set floor = ? where id = ?";
-    private final String ENDDATE_UPDATE = "update palyerstatus set endDate = ? where id = ?";
-    private final String DELETE = "delete from palyerstatus where id = ?";
+	private final String SELECT_ALL = "select * from lvl order by floor";
+	private final String SELECT_ONE = "select * from lvl where floor = ?";
+	private final String INSERT = "insert into lvl values(?,?,?,?,?)";
+	private final String FLOOR_UPDATE = "update lvl set floor = ?";
+	private final String EVENT_UPDATE = "update lvl set event = ? where floor = ?";
+	private final String HPBONUS_UPDATE = "update lvl set hpBonus = ? where floor = ?";
+	private final String ATKBONUS_UPDATE = "update lvl set atkBonus = ? where floor = ?";
+	private final String DEFBONUS_UPDATE = "update lvl set defBonus = ? where floor = ?";
+	private final String DELETE = "delete from lvl where floor = ?";
+    
+}    
 
 /*	
 - 주제 : 층 오르는 텍스트 게임
@@ -44,9 +41,117 @@ public class REFERENCE {
 	   랭킹조회 가능
 	   
 	   
-	   
+try {
+	connect();
+	
+	
+} catch (SQLException e) {
+	e.printStackTrace();
+} finally {
+	disconnect();
+}	   
 
-create table playerstatus(
+
+
+
+create table lvl(
+floor NUMBER primary key,
+event VARCHAR2(20),
+hpBonus NUMBER,
+atkBonus NUMBER,
+defBonus NUMBER);
+
+create table player(
+id NUMBER primary key,
+name VARCHAR2(20),
+hp NUMBER,
+atk NUMBER,
+def NUMBER,
+nowfloor NUMBER CONSTRAINT FLR REFERENCES lvl(floor));
+
+create table enemy(
+enemy_id NUMBER primary key,
+enemy_name VARCHAR2(20),
+enemy_hp NUMBER,
+enemy_atk NUMBER,
+enemy_def NUMBER,
+nowfloor NUMBER CONSTRAINT FLR2 REFERENCES lvl(floor));
+
+create table playrecord(
+playerid NUMBER CONSTRAINT PID REFERENCES player(id),
+playername VARCHAR2(20),
+lvlfloor NUMBER CONSTRAINT FLR3 REFERENCES lvl(floor),
+event VARCHAR2(20),
+startDate DATE default sysdate,
+endDate DATE default sysdate,
+enemyid NUMBER CONSTRAINT EID REFERENCES enemy(enemy_id));
+
+drop table playrecord;
+drop table enemy;
+drop table playerstatus;
+drop table lvl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+질문 PlayerDAOImpl
+
+@Override
+public DATE endDataUpdate(PlayerStatus playerStatus) {
+	//수정 : endData
+	DATE result = new DATE();
+	try {
+		connect();
+		
+		pstmt = conn.prepareStatement(ENDDATE_UPDATE);
+		pstmt.setDate(1, playerStatus.getPlayerEndDate());
+		pstmt.setInt(2, playerStatus.getPlayerId());
+		
+		//result = pstmt.executeUpdate();/////////////////////////////
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		disconnect();
+	}
+	return result;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ create table playerstatus(
 id NUMBER primary key,
 name VARCHAR2(20),
 hp NUMBER,
@@ -99,50 +204,9 @@ drop table enemy;
 --drop table item;
 --drop table life;
 drop table lvl;
-drop table playerstatus;
-
-
-
-
-
-
-try {
-	connect();
-	
-	
-} catch (SQLException e) {
-	e.printStackTrace();
-} finally {
-	disconnect();
-}
-
-
-
-
-*/
-
-
-
-}
-질문 PlayerDAOImpl
-
-@Override
-public DATE endDataUpdate(PlayerStatus playerStatus) {
-	//수정 : endData
-	DATE result = new DATE();
-	try {
-		connect();
-		
-		pstmt = conn.prepareStatement(ENDDATE_UPDATE);
-		pstmt.setDate(1, playerStatus.getPlayerEndDate());
-		pstmt.setInt(2, playerStatus.getPlayerId());
-		
-		//result = pstmt.executeUpdate();/////////////////////////////
-		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		disconnect();
-	}
-	return result;
-}
+drop table playerstatus;   
+    
+    
+    
+    
+    */

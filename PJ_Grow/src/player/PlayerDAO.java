@@ -6,25 +6,25 @@ import oracle.sql.DATE;
 
 public interface PlayerDAO {
 	//전체플레이어확인
-	public List<PlayerStatus> playerSelectAll();
+	public List<Player> playerSelectAll();
 	
-	//단일플레이어조회
-	public PlayerStatus playerSelect(int playerId);
+	//단일플레이어확인
+	public Player playerSelect(int playerId);
 	
 	//등록
-	public int playerInsert(PlayerStatus playerStatus);
+	public int playerInsert(Player player);
 	
 	//수정 : HP
-	public int playerHPUpdate(PlayerStatus playerStatus);
+	public int playerHPUpdate(Player player);
 	
 	//수정 : ATK
-	public int playerATKUpdate(PlayerStatus playerStatus);
+	public int playerATKUpdate(Player player);
 	
 	//수정 : DEF
-	public int playerDEFUpdate(PlayerStatus playerStatus);
+	public int playerDEFUpdate(Player player);
 	
 	//수정 : floor
-	public int playerNowFloorUpdate(PlayerStatus playerStatus);
+	public int playerNowFloorUpdate(Player player);
 	
 //	//수정 : endData
 //	public DATE endDataUpdate(PlayerStatus playerStatus);

@@ -2,7 +2,7 @@ package player;
 
 import java.sql.Date;
 
-public class PlayerStatus {
+public class Player {
 	private int playerId;
 	private String playerName;
 	private int playerHP;
@@ -110,7 +110,7 @@ public class PlayerStatus {
 
 	@Override
 	public String toString() {
-		return "ID : " + playerId + ", Name : " + playerName + ", HP : " + playerHP 
+		return "Player ID : " + playerId + ", Name : " + playerName + ", HP : " + playerHP 
 				+ ", ATK : "+ playerATK + ", DEF : " + PlayerDEF 
 				+ ", 현재 : " + playerFloor + " 층" /*+ ", 플레이 : " + PlayerCreDate
 				+ "~" + PlayerEndDate*/;
