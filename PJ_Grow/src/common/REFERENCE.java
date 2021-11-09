@@ -45,23 +45,32 @@ public class REFERENCE {
 	   
 	   
 	   
+
 create table playerstatus(
 id NUMBER primary key,
 name VARCHAR2(20),
 hp NUMBER,
 atk NUMBER,
 def NUMBER,
-floor NUMBER,
-creationDate DATE default sysdate,
-endDate DATE default sysdate);
+nowfloor NUMBER
+--,creationDate DATE default sysdate,
+--endDate DATE default sysdate
+);
 
 --create table life(
 --life_player_hp NUMBER(1));
 
+
+
+
 create table playrecord(
-playerid NUMBER CONSTRAINT PID REFERENCES playerstatus(id),
-floor NUMBER,
-event VARCHAR2(20));
+playerid NUMBER
+--CONSTRAINT PID REFERENCES playerstatus(id)
+,levelfloor NUMBER,
+event VARCHAR2(20),
+startDate DATE default sysdate,
+endDate DATE default sysdate
+);
 
 create table enemy(
 enemy_id NUMBER primary key,
@@ -70,18 +79,29 @@ enemy_life NUMBER,
 enemy_atk NUMBER,
 enemy_def NUMBER);
 
-create table item(
-item_id NUMBER primary key,
-item_name VARCHAR2(20),
-item_life NUMBER,
-item_atk NUMBER,
-item_def NUMBER);
+--create table item(
+--item_id NUMBER primary key,
+--item_name VARCHAR2(20),
+--item_life NUMBER,
+--item_atk NUMBER,
+--item_def NUMBER);
+
+create table lvl(
+floor NUMBER
+--primary key
+,event VARCHAR2(20),
+hpBonus NUMBER,
+atkBonus NUMBER,
+defBonus NUMBER);
 
 drop table playrecord;
 drop table enemy;
-drop table item;
+--drop table item;
 --drop table life;
+drop table lvl;
 drop table playerstatus;
+
+
 
 
 

@@ -9,8 +9,8 @@ public class PlayerStatus {
 	private int playerATK;
 	private int PlayerDEF;
 	private int playerFloor;
-	private Date PlayerCreDate;
-	private Date PlayerEndDate;
+	//private Date PlayerCreDate;
+	//private Date PlayerEndDate;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -84,27 +84,27 @@ public class PlayerStatus {
 
 
 
-	public Date getPlayerCreDate() {
-		return PlayerCreDate;
-	}
-
-
-
-	public void setPlayerCreDate(Date playerCreDate) {
-		PlayerCreDate = playerCreDate;
-	}
-
-
-
-	public Date getPlayerEndDate() {
-		return PlayerEndDate;
-	}
-
-
-
-	public void setPlayerEndDate(Date playerEndDate) {
-		PlayerEndDate = playerEndDate;
-	}
+//	public Date getPlayerCreDate() {
+//		return PlayerCreDate;
+//	}
+//
+//
+//
+//	public void setPlayerCreDate(Date playerCreDate) {
+//		PlayerCreDate = playerCreDate;
+//	}
+//
+//
+//
+//	public Date getPlayerEndDate() {
+//		return PlayerEndDate;
+//	}
+//
+//
+//
+//	public void setPlayerEndDate(Date playerEndDate) {
+//		PlayerEndDate = playerEndDate;
+//	}
 
 
 
@@ -112,8 +112,8 @@ public class PlayerStatus {
 	public String toString() {
 		return "ID : " + playerId + ", Name : " + playerName + ", HP : " + playerHP 
 				+ ", ATK : "+ playerATK + ", DEF : " + PlayerDEF 
-				+ ", 기록 : " + playerFloor + " 층" + ", 플레이 : " + PlayerCreDate
-				+ "~" + PlayerEndDate;
+				+ ", 현재 : " + playerFloor + " 층" /*+ ", 플레이 : " + PlayerCreDate
+				+ "~" + PlayerEndDate*/;
 	}
 	
 	

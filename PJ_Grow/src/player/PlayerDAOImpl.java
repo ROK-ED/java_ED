@@ -13,12 +13,12 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	//사용할 SQL 정리
 	private final String SELECT_ALL = "select * from palyerstatus order by id";
 	private final String SELECT_ONE = "select * from palyerstatus where id = ?";
-	private final String INSERT = "insert into palyerstatus values(?,?,?,?,?,?,?,?)";
+	private final String INSERT = "insert into palyerstatus values(?,?,?,?,?,?)";//?두개 삭제함
     private final String HP_UPDATE = "update palyerstatus set hp = ? where id = ?";
     private final String ATK_UPDATE = "update palyerstatus set atk = ? where id = ?";
     private final String DEF_UPDATE = "update palyerstatus set def = ? where id = ?";
-    private final String FLOOR_UPDATE = "update palyerstatus set floor = ? where id = ?";
-    private final String ENDDATE_UPDATE = "update palyerstatus set endDate = ? where id = ?";
+    private final String FLOOR_UPDATE = "update palyerstatus set nowfloor = ? where id = ?";
+//    private final String ENDDATE_UPDATE = "update palyerstatus set endDate = ? where id = ?";
     private final String DELETE = "delete from palyerstatus where id = ?";
 	
     //싱글톤
@@ -29,7 +29,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public List<PlayerStatus> selectAll() {
+	public List<PlayerStatus> playerSelectAll() {
 		//전체플레이어확인
 		List<PlayerStatus> list = new ArrayList<>();
 		try {
@@ -45,8 +45,8 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 				playerStatus.setPlayerATK(rs.getInt("ATK"));
 				playerStatus.setPlayerDEF(rs.getInt("def"));
 				playerStatus.setPlayerFloor(rs.getInt("floor"));
-				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
-				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
+//				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
+//				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
 				
 				list.add(playerStatus);
 			}
@@ -61,7 +61,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public PlayerStatus selectOne(int playerId) {
+	public PlayerStatus playerSelect(int playerId) {
 		//단일플레이어조회
 		PlayerStatus playerStatus = null;
 		try {
@@ -79,8 +79,8 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 				playerStatus.setPlayerATK(rs.getInt("ATK"));
 				playerStatus.setPlayerDEF(rs.getInt("def"));
 				playerStatus.setPlayerFloor(rs.getInt("floor"));
-				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
-				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
+//				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
+//				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
 	    		}
 			
 			
@@ -93,7 +93,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int insert(PlayerStatus playerStatus) {
+	public int playerInsert(PlayerStatus playerStatus) {
 		//등록
 		int result = 0;
 		try {
@@ -106,8 +106,8 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 			pstmt.setInt(4, playerStatus.getPlayerATK());
 			pstmt.setInt(5, playerStatus.getPlayerDEF());
 			pstmt.setInt(6, playerStatus.getPlayerFloor());
-			pstmt.setDate(7, playerStatus.getPlayerCreDate());
-			pstmt.setDate(8, playerStatus.getPlayerEndDate());
+//			pstmt.setDate(7, playerStatus.getPlayerCreDate());
+//			pstmt.setDate(8, playerStatus.getPlayerEndDate());
 			
 			result = pstmt.executeUpdate();
 			
@@ -122,7 +122,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 
 
 	@Override
-	public int HPUpdate(PlayerStatus playerStatus) {
+	public int playerHPUpdate(PlayerStatus playerStatus) {
 		//수정 : HP
 		int result = 0;
 		try {
@@ -143,7 +143,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int ATKUpdate(PlayerStatus playerStatus) {
+	public int playerATKUpdate(PlayerStatus playerStatus) {
 		//수정 : ATK
 		int result = 0;
 		try {
@@ -164,7 +164,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int DEFUpdate(PlayerStatus playerStatus) {
+	public int playerDEFUpdate(PlayerStatus playerStatus) {
 		//수정 : DEF
 		int result = 0;
 		try {
@@ -185,7 +185,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	}
 
 	@Override
-	public int floorUpdate(PlayerStatus playerStatus) {
+	public int playerNowFloorUpdate(PlayerStatus playerStatus) {
 		//수정 : floor
 		int result = 0;
 		try {
@@ -205,30 +205,30 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 		return result;
 	}
 
-	@Override
-	public DATE endDataUpdate(PlayerStatus playerStatus) {
-		//수정 : endData
-		DATE result = new DATE();
-		try {
-			connect();
-			
-			pstmt = conn.prepareStatement(ENDDATE_UPDATE);
-			pstmt.setDate(1, playerStatus.getPlayerEndDate());
-			pstmt.setInt(2, playerStatus.getPlayerId());
-			
-			//result = pstmt.executeUpdate();/////////////////////////////
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-		return result;
-	}
+//	@Override
+//	public DATE endDataUpdate(PlayerStatus playerStatus) {
+//		//수정 : endData
+//		DATE result = new DATE();
+//		try {
+//			connect();
+//			
+//			pstmt = conn.prepareStatement(ENDDATE_UPDATE);
+//			pstmt.setDate(1, playerStatus.getPlayerEndDate());
+//			pstmt.setInt(2, playerStatus.getPlayerId());
+//			
+//			//result = pstmt.executeUpdate();/////////////////////////////
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			disconnect();
+//		}
+//		return result;
+//	}
 	
 
 	@Override
-	public void Playerdelete(int playerId) {
+	public void playerDelete(int playerId) {
 		//삭제
 		int result = 0;
 		try {
