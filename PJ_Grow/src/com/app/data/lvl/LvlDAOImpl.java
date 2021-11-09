@@ -1,10 +1,10 @@
-package lvl;
+package com.app.data.lvl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.DAO;
+import com.app.common.DAO;
 
 public class LvlDAOImpl extends DAO implements LvlDAO {
 	// 사용할 SQL 정리

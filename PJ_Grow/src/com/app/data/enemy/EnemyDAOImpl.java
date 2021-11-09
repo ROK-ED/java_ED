@@ -1,13 +1,13 @@
-package enemy;
+package com.app.data.enemy;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.DAO;
-import player.Player;
-import player.PlayerDAO;
-import player.PlayerDAOImpl;
+import com.app.common.DAO;
+import com.app.data.player.Player;
+import com.app.data.player.PlayerDAO;
+import com.app.data.player.PlayerDAOImpl;
 
 public class EnemyDAOImpl extends DAO implements EnemyDAO {
 	// 사용할 SQL 정리

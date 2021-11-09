@@ -1,4 +1,4 @@
-package enemy;
+package com.app.data.enemy;
 
 public class Enemy {
 	private int enemyId;

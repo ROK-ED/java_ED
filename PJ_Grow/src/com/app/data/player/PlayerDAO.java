@@ -1,4 +1,4 @@
-package player;
+package com.app.data.player;
 
 import java.util.List;
 

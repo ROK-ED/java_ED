@@ -1,4 +1,4 @@
-package common;
+package com.app.common;
 
 public class REFERENCE {
 	

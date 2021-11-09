@@ -1,4 +1,4 @@
-package record;
+package com.app.data.record;
 
 import java.util.List;
 

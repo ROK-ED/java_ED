@@ -1,4 +1,4 @@
-package lvl;
+package com.app.data.lvl;
 
 public class Lvl {
 	private int lvlFloor;

@@ -1,4 +1,4 @@
-package enemy;
+package com.app.data.enemy;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
-package record;
+package com.app.data.record;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.DAO;
-import lvl.Lvl;
-import lvl.LvlDAO;
-import lvl.LvlDAOImpl;
-import player.Player;
+import com.app.common.DAO;
+import com.app.data.lvl.Lvl;
+import com.app.data.lvl.LvlDAO;
+import com.app.data.lvl.LvlDAOImpl;
+import com.app.data.player.Player;
 
 public class RecordDAOImpl extends DAO implements RecordDAO {
 	// 사용할 SQL 정리

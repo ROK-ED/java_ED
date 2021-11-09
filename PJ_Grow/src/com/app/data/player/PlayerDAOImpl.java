@@ -1,12 +1,11 @@
-package player;
+package com.app.data.player;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.common.DAO;
 
-
-import common.DAO;
 import oracle.sql.DATE;
 
 public class PlayerDAOImpl extends DAO implements PlayerDAO {
