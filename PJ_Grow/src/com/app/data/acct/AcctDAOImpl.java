@@ -14,7 +14,7 @@ public class AcctDAOImpl extends DAO implements AcctDAO {
 	private final String SELECT_ALL = "select * from acct order by acctid";
 	private final String SELECT_ONE = "select * from acct where acctid = ?";
 	private final String INSERT = "insert into acct values(?,?)";
-	private final String DELETE = "delete from acct where acctpw = ?";
+	private final String DELETE = "delete from acct where acctid = ?";
 
 	// 싱글톤
 	private static AcctDAO instance = new AcctDAOImpl();
@@ -96,13 +96,13 @@ public class AcctDAOImpl extends DAO implements AcctDAO {
 	}
 
 	@Override
-	public void acctDelete(Acct acct) {
+	public void acctDelete(String acctid) {
 		// 삭제
-
+		Acct acct = null;
 		try {
 			connect();
 			pstmt = conn.prepareStatement(DELETE);
-			pstmt.setString(1, acct.getAcctPw());
+			pstmt.setString(1, acctid);
 			int result = pstmt.executeUpdate();
 			System.out.println(result + "건 삭제완료");
 

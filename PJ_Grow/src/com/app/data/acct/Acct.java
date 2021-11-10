@@ -18,7 +18,7 @@ public class Acct {
 	}
 	@Override
 	public String toString() {
-		return "ID : " + acctId + ", PW : 비공개 ";
+		return "ID : " + acctId + "  PW : "+ acctPw.length()+"자리";
 	}
 	
 	

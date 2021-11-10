@@ -4,8 +4,12 @@ package com.app.common;
 
 public class REFERENCE {
 	private final String INSERT = "insert into player values(?,?,?,?,?)";
-	
-    
+//	System.out.println("기본적인 전투는 주사위 두개를 굴린 값의 합으로 상대방과 싸우게 됩니다.");
+//	System.out.println("Player값이 크면 데미지를 주며, Player이 작으면 방어를");
+//	System.out.println("값이 낮은 2,4는 특별하게 회피를 하게 해드리죠");
+//	System.out.println("그리고 적과 나의 주사위 값이 두배 이상으로 차이나면 두배의 데미지가 들어갑니다.");
+//	System.out.println("이벤트는 전투,수련,함정,휴식 중에 랜덤하게 걸리며");	
+//    
 }    
 //Integer.parseInt(scanner.nextLine());
 /*	
@@ -45,7 +49,17 @@ try {
 	disconnect();
 }	   
 
+create table acct(acctid VARCHAR2(20) primary key,acctpw VARCHAR2(20));
+create table player(id NUMBER primary key,hp NUMBER,atk NUMBER,def NUMBER,nowfloor NUMBER );
+create table lvl(playerid NUMBER CONSTRAINT PID1 REFERENCES player(id),floor NUMBER ,event VARCHAR2(20),hpBonus NUMBER,atkBonus NUMBER,defBonus NUMBER);
+create table enemy(playerid NUMBER CONSTRAINT PID2 REFERENCES player(id),enemy_id NUMBER,enemy_name VARCHAR2(20),enemy_hp NUMBER,enemy_atk NUMBER,enemy_def NUMBER,nowfloor NUMBER );
+create table playrecord(playerid NUMBER CONSTRAINT PID3 REFERENCES player(id),playername VARCHAR2(20),lvlfloor NUMBER ,event VARCHAR2(20),startDate DATE default sysdate,endDate DATE default sysdate,enemyid NUMBER );
 
+drop table playrecord;
+drop table enemy;
+drop table lvl;
+drop table player;
+drop table acct;
 
 
 create table acct(

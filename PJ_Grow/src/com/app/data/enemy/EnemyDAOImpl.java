@@ -14,10 +14,10 @@ public class EnemyDAOImpl extends DAO implements EnemyDAO {
 	private final String SELECT_ALL = "select * from enemy order by playerid";
 	private final String SELECT_ONE = "select * from enemy where playerid = ?";
 	private final String INSERT = "insert into enemy values(?,?,?,?,?,?,?)";
-//	private final String HP_UPDATE = "update enemy set hp = ? where playerid = ?";
-//	private final String ATK_UPDATE = "update enemy set atk = ? where playerid = ?";
-//	private final String DEF_UPDATE = "update enemy set def = ? where playerid = ?";
-//	private final String FLOOR_UPDATE = "update enemy set nowfloor = ? where playerid = ?";
+	private final String HP_UPDATE = "update enemy set enemy_hp = ? where playerid = ?";
+	private final String ATK_UPDATE = "update enemy set enemy_atk = ? where playerid = ?";
+	private final String DEF_UPDATE = "update enemy set enemy_def = ? where playerid = ?";
+	private final String FLOOR_UPDATE = "update enemy set nowfloor = ? where playerid = ?";
 	private final String DELETE = "delete from enemy where playerid = ?";
 
 	// 싱글톤
@@ -113,89 +113,89 @@ public class EnemyDAOImpl extends DAO implements EnemyDAO {
 		return result;
 	}
 
-//	@Override
-//	public int enemyHPUpdate(Enemy enemy) {
-//		// 수정 : HP
-//		int result = 0;
-//		try {
-//			connect();
-//
-//			pstmt = conn.prepareStatement(HP_UPDATE);
-//			pstmt.setInt(1, enemy.getEnemyHP());
-//			pstmt.setInt(2, enemy.getEnemyId());
-//
-//			result = pstmt.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//		return result;
-//	}
-//
-//	@Override
-//	public int enemyATKUpdate(Enemy enemy) {
-//		// 수정 : ATK
-//		int result = 0;
-//		try {
-//			connect();
-//
-//			pstmt = conn.prepareStatement(ATK_UPDATE);
-//			pstmt.setInt(1, enemy.getEnemyATK());
-//			pstmt.setInt(2, enemy.getEnemyId());
-//
-//			result = pstmt.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//		return result;
-//	}
-//
-//	@Override
-//	public int enemyDEFUpdate(Enemy enemy) {
-//		// 수정 : DEF
-//		int result = 0;
-//		try {
-//			connect();
-//
-//			pstmt = conn.prepareStatement(DEF_UPDATE);
-//			pstmt.setInt(1, enemy.getEnemyDEF());
-//			pstmt.setInt(2, enemy.getEnemyId());
-//
-//			result = pstmt.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//		return result;
-//	}
-//
-//	@Override
-//	public int enemyNowFloorUpdate(Enemy enemy) {
-//		// 수정 : floor
-//		int result = 0;
-//		try {
-//			connect();
-//
-//			pstmt = conn.prepareStatement(FLOOR_UPDATE);
-//			pstmt.setInt(1, enemy.getEnemyFloor());
-//			pstmt.setInt(2, enemy.getEnemyId());
-//
-//			result = pstmt.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//		return result;
-//	}
+	@Override
+	public int enemyHPUpdate(Enemy enemy) {
+		// 수정 : HP
+		int result = 0;
+		try {
+			connect();
+
+			pstmt = conn.prepareStatement(HP_UPDATE);
+			pstmt.setInt(1, enemy.getEnemyHP());
+			pstmt.setInt(2, enemy.getEnemyId());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+
+	@Override
+	public int enemyATKUpdate(Enemy enemy) {
+		// 수정 : ATK
+		int result = 0;
+		try {
+			connect();
+
+			pstmt = conn.prepareStatement(ATK_UPDATE);
+			pstmt.setInt(1, enemy.getEnemyATK());
+			pstmt.setInt(2, enemy.getEnemyId());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+
+	@Override
+	public int enemyDEFUpdate(Enemy enemy) {
+		// 수정 : DEF
+		int result = 0;
+		try {
+			connect();
+
+			pstmt = conn.prepareStatement(DEF_UPDATE);
+			pstmt.setInt(1, enemy.getEnemyDEF());
+			pstmt.setInt(2, enemy.getEnemyId());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
+
+	@Override
+	public int enemyNowFloorUpdate(Enemy enemy) {
+		// 수정 : floor
+		int result = 0;
+		try {
+			connect();
+
+			pstmt = conn.prepareStatement(FLOOR_UPDATE);
+			pstmt.setInt(1, enemy.getEnemyFloor());
+			pstmt.setInt(2, enemy.getEnemyId());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return result;
+	}
 
 	@Override
 	public void enemyDelete(int enemyPlayerId) {

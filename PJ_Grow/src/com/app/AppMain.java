@@ -1,7 +1,7 @@
 package com.app;
 
+import java.util.List;
 import java.util.Scanner;
-
 
 import com.app.common.Frame;
 import com.app.data.acct.Acct;
@@ -15,9 +15,9 @@ public class AppMain {
 	public static void main(String[] args) {
 		
 		while (true) {
-			System.out.println("=====================================================");
+			System.out.println("=========================================================");
 			System.out.println("== 1.시작 2.계정생성 3.계정확인 4.전체계정확인 5.계정삭제 9.종료 ==");
-			System.out.println("=====================================================");
+			System.out.println("=========================================================");
 			System.out.println("선택 >>");
 			int selected = scanner.nextInt();
 
@@ -43,19 +43,32 @@ public class AppMain {
 		
 	}
 	private static void acctDelete() {
-		// TODO Auto-generated method stub
-		System.out.println("구현 준비중");
-		System.exit(0);		
+		//계정삭제
+		System.out.println("계정을 삭제합니다.");
+		Acct acct = new Acct();
+		System.out.println("삭제할 ID>>");
+		String id = scanner.next();
+		adao.acctDelete(id);
+		System.out.println(id+"계정을 삭제했습니다.");
+		
 	}
 	private static void acctSelectAll() {
-		// TODO Auto-generated method stub
-		System.out.println("구현 준비중");
-		System.exit(0);	
+		//전체계정확인
+		System.out.println("전체계정을 열람합니다.");
+		System.out.println("보안상 비밀번호는 자리수만표시 합니다.");
+		List<Acct> list = adao.acctSelectAll();
+		for(Acct acct : list) {
+			System.out.println(acct);
+		}
 	}
 	private static void acctSelectOne() {
-		// TODO Auto-generated method stub
-		System.out.println("구현 준비중");
-		System.exit(0);	
+		//계정확인
+		System.out.println("특정 계정을 검색합니다.");
+		Acct acct = new Acct();
+		System.out.println("검색할 ID>>");
+		String id = scanner.next();
+		acct = adao.acctSelect(id);
+		System.out.println(acct);
 	}
 	private static void acctInsert() {
 		//계정 생성

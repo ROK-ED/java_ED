@@ -14,6 +14,6 @@ public interface AcctDAO {
 	public void acctInsert(Acct acct);
 
 	// 삭제
-	public void acctDelete(Acct acct);
+	public void acctDelete(String acctid);
 
 }

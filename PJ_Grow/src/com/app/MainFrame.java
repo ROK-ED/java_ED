@@ -3,6 +3,7 @@ package com.app;
 import java.util.Scanner;
 
 import com.app.common.Frame;
+import com.app.data.acct.Acct;
 import com.app.data.acct.AcctDAO;
 import com.app.data.acct.AcctDAOImpl;
 import com.app.data.enemy.Enemy;
@@ -26,45 +27,62 @@ public class MainFrame implements Frame {
 	EnemyDAO edao = EnemyDAOImpl.getInstance();
 	RecordDAO rdao = RecordDAOImpl.getInstance();
 	AcctDAO adao = AcctDAOImpl.getInstance();
+
 	// 메소드
 	// 프로그램 실행 메소드
 	@Override
 	public void run() {
 		/***************************** 로그인 *****************************/
-		
-		
-		
-		
-		
-		
-		
-		/***************************** 메뉴호출 *****************************/
-		// 메뉴를 출력하고 메뉴를 선택해서 해당 기능을 호출
-		while (true) {
-			menuPrint();
-			int menuNo = menuSelect();
+		System.out.println("로그인을 시작합니다.");
+		Acct acct = new Acct();
+		System.out.println("ID>>");
+		String acctId = scanner.nextLine();
 
-			if (menuNo == 1) { // 등록 및 수정 ~ 플레이
-				play();
-			} else if (menuNo == 2) { // 삭제 ~ 캐릭터를 기반한 전부
-				deleteData();
-			} else if (menuNo == 3) { // 단건조회
-				selectOne();
-			} else if (menuNo == 4) { // 전체조회
-				selectAll();
-			} else if (menuNo == 9) { // 종료
-				end();
-				break;
+		if ((acct = adao.acctSelect(acctId)) == null) {
+			System.out.println("ID가 없습니다.");
+			return;
+		} else {
+			acct = adao.acctSelect(acctId);
+			System.out.println("PASSWORD>>");
+			String acctPw = scanner.nextLine();
+			if (acctPw.equals(acct.getAcctPw())) {
+				System.out.println("접속되었습니다.");
+
+				/***************************** 메뉴호출 *****************************/
+				// 메뉴를 출력하고 메뉴를 선택해서 해당 기능을 호출
+				while (true) {
+					menuPrint();// 이메소드 왜 두번 출력되는지 확인 해야됨
+					int menuNo = menuSelect();
+
+					if (menuNo == 2) { // 등록 및 수정 ~ 플레이
+						create();
+					} else if (menuNo == 1) { // 불러오기
+						cont();
+					} else if (menuNo == 3) { // 삭제 ~ 캐릭터를 기반한 전부
+						deleteData();
+					} else if (menuNo == 4) { // 단건조회
+						selectOne();
+					} else if (menuNo == 5) { // 전체조회
+						selectAll();
+					} else if (menuNo == 9) { // 종료
+						end();
+						break;
+					}
+				}
+			} else {
+				System.out.println("PASSWORD가 일치하지 않습니다.");
+				return;
 			}
+
 		}
 	}
 
 	// 메뉴를 출력하는 메소드
 	void menuPrint() {
 		System.out.println("");
-		System.out.println("================================================");
-		System.out.println("== 1.PLAY 2.데이터삭제 3.캐릭터히스토리 4.전체조회 9.종료 ==");
-		System.out.println("================================================");
+		System.out.println("==================================================================");
+		System.out.println("== 1.이어하기 2.새로시작 3.데이터삭제 4.캐릭터히스토리 5.전체조회 9.종료 ==");
+		System.out.println("==================================================================");
 		System.out.println("선택>>");
 	}
 
@@ -84,8 +102,8 @@ public class MainFrame implements Frame {
 		System.out.println("프로그램을 종료합니다.");
 	}
 
-	// - PLAY
-	void play() {
+	// - 등록 및 실행
+	void create() {
 		/***************************** 게임초기생성 *****************************/
 		Player fPlayer = new Player();
 		Lvl fLvl = new Lvl();
@@ -97,11 +115,14 @@ public class MainFrame implements Frame {
 		int dice = 0; // 주사위 하나 (int) (Math.random() * 6) + 1;
 		int playerDoubleDice = 0; // 주사위 둘 (int) (Math.random() * 12) + 1;
 		int enemyDoubleDice = 0;
-		
+
 		String name = null;
 		System.out.println("게임을 시작합니다.");
-		System.out.println("데이터 수집을 위해 원하시는 코드와 나이를 입력해주시길 바랍니다.");
-		System.out.println("코드(숫자만가능)>>"); // 나중에 중복안되게 수정해야됨
+		System.out.println();
+		System.out.println();
+		System.out.println("데이터 수집을 위해 좋아하는 숫자와 나이를 입력해주시길 바랍니다.");
+		System.out.println("숫자(가능한 길게해주세요)>>"); // 나중에 중복안되게 수정해야됨
+		System.out.println("이 숫자로 데이터를 불러올수 있습니다.");
 		code = Integer.parseInt(scanner.nextLine());
 		System.out.println("나이>>");
 		age = Integer.parseInt(scanner.nextLine());
@@ -165,10 +186,9 @@ public class MainFrame implements Frame {
 		System.out.println("난이도에 따른 게임 환경을 생성했습니다.");
 
 		// 레코드생성
-		fRecord.setRecordPlayerId(fPlayer.getPlayerId());
-
+		fRecord.setRecordPlayerId(code);
 		fRecord.setRecordPlayerName(name);
-		fRecord.setRecordLvlFloor(fLvl.getLvlFloor());
+		fRecord.setRecordLvlFloor(difficulty);
 		fRecord.setRecordEvent(fLvl.getLvlEvent());
 //디폴트	fRecord.setRecordStartDate();
 //디폴트	fRecord.setRecordEndDate();	
@@ -176,12 +196,14 @@ public class MainFrame implements Frame {
 
 		rdao.recordInsert(fRecord);
 		System.out.println("초기값이 기록되었습니다.");
+		System.out.println("Enter를 눌러주세요");
+		System.out.println(scanner.nextLine());
 		// 초기값들 조회
 		System.out.println();
 		System.out.println("====================================================================");
-		System.out.println("===============================PLAYER===============================");
+		System.out.println("===============================STATUS===============================");
 		System.out.println(pdao.playerSelect(code));
-		System.out.println("===============================PLAYER===============================");
+		System.out.println("===============================STATUS===============================");
 		System.out.println("====================================================================");
 		System.out.println();
 		System.out.println("로 생성되었습니다.");
@@ -200,72 +222,172 @@ public class MainFrame implements Frame {
 		System.out.println("그럼 행운을 빕니다.");
 		System.out.println("Enter");
 		System.out.println(scanner.nextLine());
-		System.out.println("======================게임에 입장합니다.======================");
-		/***************************** n층(이곳부터 이벤트 및 분기) *****************************/
-		
-		int life = fPlayer.getPlayerHP();
-		int i=0;
-		while(life > 0) {
-				int floor = 0;
-				floor = fLvl.getLvlFloor()+i;
-				int floorselect = 0;
-				System.out.println("=========================================");
-				System.out.println("======="+ floor +" 층에 입장하였습니다.=======");
-				System.out.println("==========  1.전투  2.이벤트 9.DIE ==========");
-				System.out.println("=========================================");
-				System.out.println("선택>>");
-				floorselect = Integer.parseInt(scanner.nextLine());
-				if(floorselect == 1) {
-					// 전투
-				} else if (floorselect == 2){
-					// 이벤트
-				} else if (floorselect == 9) {
-					// DIE
-					//강제로 라이프 0
-				}
-				i++;
+		play();
+	}
+
+	// 계속하기
+	void cont() {
+		Player fPlayer = new Player();
+		Lvl fLvl = new Lvl();
+		Enemy fEnemy = new Enemy();
+		Record fRecord = new Record();
+		int difficulty = 0;
+		int code = 0;
+		int age = 0;
+		int dice = 0; // 주사위 하나 (int) (Math.random() * 6) + 1;
+		int playerDoubleDice = 0; // 주사위 둘 (int) (Math.random() * 12) + 1;
+		int enemyDoubleDice = 0;
+
+		System.out.println("불러올 코드를 입력해주세요");
+		System.out.println("CODE>>");
+		code = Integer.parseInt(scanner.nextLine());
+
+		if ((fPlayer = pdao.playerSelect(code)) == null) {
+			System.out.println("CODE가 없습니다.");
+			return;
+		} else {
+			System.out.println("이전 데이터를 불러옵니다.");
+			fPlayer = pdao.playerSelect(code);
+			fLvl = ldao.lvlSelect(code);
+//			fEnemy = edao.enemySelect(code);
+			fRecord = rdao.recordSelect(code);
+			System.out.println(fPlayer);
+			System.out.println(fLvl);
+//			System.out.println(fEnemy);
+
+			System.out.println("만약 체력이 0인걸 불러오면 바로 죽으니 기대는 말아주시길 바랍니다.");
+			System.out.println("Enter");
+			System.out.println(scanner.nextLine());
+			play();
 
 		}
+
+	}
+
+	// - PLAY
+	void play() {
+		Player fPlayer = new Player();
+		Lvl fLvl = new Lvl();
+		Enemy fEnemy = new Enemy();
+		Record fRecord = new Record();
+		int difficulty = 0;
+		int code = 0;
+		int age = 0;
+		int dice = 0; // 주사위 하나 (int) (Math.random() * 6) + 1;
+		int playerDoubleDice = 0; // 주사위 둘 (int) (Math.random() * 12) + 1;
+		int enemyDoubleDice = 0;
+		code = 4;/////////////////////////////////////////////////////////////////////
+
+		fPlayer = pdao.playerSelect(code);
+		fLvl = ldao.lvlSelect(code);
+//		fEnemy = edao.enemySelect(code);
+		fRecord = rdao.recordSelect(code);
+
+		/************************** PLAY n층(이곳부터 이벤트 및 분기) *************************/
+		System.out.println("======================게임에 입장합니다.======================");
+		System.out.println("Enter");
+		System.out.println(scanner.nextLine());
+
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/***************************** n층(이곳부터 이벤트 및 분기) *****************************/
+		int i = 0;
+		int e = 1;
+		while (fPlayer.getPlayerHP() > 0) {
+			int floor = 0;
+			floor = fLvl.getLvlFloor() + i;
+			int floorselect = 0;
+			System.out.println("===============================STATUS===============================");
+			System.out.println(pdao.playerSelect(code));
+			System.out.println("===============================STATUS===============================");
+			System.out.println("==============================================");
+			System.out.println("=============" + floor + " 층에 입장하였습니다.=============");
+			System.out.println("===========  1.전투  2.이벤트  9.종료  ===========");
+			System.out.println("==============================================");
+			System.out.println("선택>>");
+			floorselect = menuSelect();
+			if (floorselect == 1) {
+				// 전투
+				// 적생성 ~위에껀 나중에 삭제해야됨
+				fEnemy.setEnemyPlayerId(code);
+				fEnemy.setEnemyId(e++);
+				fEnemy.setEnemyName("Inside (" + floor + ")");
+				fEnemy.setEnemyHP(floor - fLvl.getLvlHPBonus());
+				fEnemy.setEnemyATK(floor - fLvl.getLvlATKBonus());
+				
+				fEnemy.setEnemyDEF(floor - fLvl.getLvlDEFBonus());
+				fEnemy.setEnemyFloor(floor);
+				edao.enemyInsert(fEnemy);
+				System.out.println("enemy 생성 완료");
+				System.out.println(fEnemy.getEnemyName() + "과 전투를 시작합니다.");
+				while (fEnemy.getEnemyHP() > 0) {
+					
+					System.out.println("주사위를 굴려주세요");
+					System.out.println("Enter");
+					System.out.println(scanner.nextLine());
+					playerDoubleDice = ((int) (Math.random() * 6) + 1) + ((int) (Math.random() * 6) + 1);
+					enemyDoubleDice = ((int) (Math.random() * 6) + 1) + ((int) (Math.random() * 6) + 1);
+					System.out.println("내 주사위 : " + playerDoubleDice);
+					System.out.println("적 주사위 : " + enemyDoubleDice);
+					if (playerDoubleDice == enemyDoubleDice) {
+						System.out.println("동시에 맞았습니다.");
+						fPlayer.setPlayerHP(fPlayer.getPlayerHP() - enemyDoubleDice);
+						fEnemy.setEnemyHP(fEnemy.getEnemyHP() - playerDoubleDice);
+					} else if (playerDoubleDice == 2) {
+						System.out.println("회피하였습니다.");
+					} else if (playerDoubleDice == 4) {
+						System.out.println("회피하였습니다.");
+					} else if (playerDoubleDice > enemyDoubleDice) {
+						System.out.println("공격합니다.");
+						fEnemy.setEnemyHP(fEnemy.getEnemyHP() - ((playerDoubleDice + fPlayer.getPlayerATK())
+								- (enemyDoubleDice + fEnemy.getEnemyDEF())));
+					} else if (playerDoubleDice < enemyDoubleDice) {
+						System.out.println("방어합니다.");
+						fPlayer.setPlayerHP(fPlayer.getPlayerHP() - ((enemyDoubleDice + fEnemy.getEnemyATK())
+								- (playerDoubleDice + fPlayer.getPlayerDEF())));
+					}
+					System.out.println("PLAYER HP : " + fPlayer.getPlayerHP());
+					System.out.println("ENEMY HP : " + fEnemy.getEnemyHP());
+					System.out.println(fPlayer);
+					System.out.println(fEnemy);
+					pdao.playerHPUpdate(fPlayer);
+					if (fPlayer.getPlayerHP() <= 0) {
+						pdao.playerHPUpdate(fPlayer);
+						System.out.println("YOU DIE");
+						break;
+					}
+				}
+				System.out.println("전투가 종료되었습니다.");
+			} else if (floorselect == 2) {
+				// 이벤트
+				System.out.println("준비중....");
+			} else if (floorselect == 9) {
+				// 종료 강제로 나가기
+				System.exit(0);
+			}
+			i++;
+
+		}
 
 		System.out.println("YOU DIE");
 
 	}
 
+	/*********************************************************************************/
 	// 삭제 ~ 캐릭터를 기반한 전부
 	void deleteData() {
 		System.out.println("구현 준비중");
-		System.exit(0);	
+		System.exit(0);
 	}
 
 	// - 전체조회
 	void selectAll() {
 		System.out.println("구현 준비중");
-		System.exit(0);	
+		System.exit(0);
 	}
 
 	// - 단건조회
 	void selectOne() {
 		System.out.println("구현 준비중");
-		System.exit(0);	
+		System.exit(0);
 	}
 
 }
