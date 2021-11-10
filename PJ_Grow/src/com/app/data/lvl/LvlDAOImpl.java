@@ -8,15 +8,15 @@ import com.app.common.DAO;
 
 public class LvlDAOImpl extends DAO implements LvlDAO {
 	// 사용할 SQL 정리
-	private final String SELECT_ALL = "select * from lvl order by floor";
-	private final String SELECT_ONE = "select * from lvl where floor = ?";
-	private final String INSERT = "insert into lvl values(?,?,?,?,?)";
+	private final String SELECT_ALL = "select * from lvl order by playerid";
+	private final String SELECT_ONE = "select * from lvl where playerid = ?";
+	private final String INSERT = "insert into lvl values(?,?,?,?,?,?)";
 //	private final String FLOOR_UPDATE = "update lvl set floor = ?";
 //	private final String EVENT_UPDATE = "update lvl set event = ? where floor = ?";
 //	private final String HPBONUS_UPDATE = "update lvl set hpBonus = ? where floor = ?";
 //	private final String ATKBONUS_UPDATE = "update lvl set atkBonus = ? where floor = ?";
 //	private final String DEFBONUS_UPDATE = "update lvl set defBonus = ? where floor = ?";
-	private final String DELETE = "delete from lvl where floor = ?";
+	private final String DELETE = "delete from lvl where playerid = ?";
 
 	// 싱글톤
 	private static LvlDAO instance = new LvlDAOImpl();
@@ -36,6 +36,7 @@ public class LvlDAOImpl extends DAO implements LvlDAO {
 			rs = stmt.executeQuery(SELECT_ALL);
 			while (rs.next()) {
 				Lvl lvl = new Lvl();
+				lvl.setLvlPlayerId(rs.getInt("playerid"));
 				lvl.setLvlFloor(rs.getInt("floor"));
 				lvl.setLvlEvent(rs.getString("event"));
 				lvl.setLvlHPBonus(rs.getInt("hpBonus"));
@@ -54,18 +55,19 @@ public class LvlDAOImpl extends DAO implements LvlDAO {
 	}
 
 	@Override
-	public Lvl lvlSelect(int floor) {
+	public Lvl lvlSelect(int lvlPlayerId) {
 		//현재층확인
 		Lvl lvl = null;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(SELECT_ONE);
-			pstmt.setInt(1, floor);
+			pstmt.setInt(1, lvlPlayerId);
 			
 			rs=pstmt.executeQuery();
 			if (rs.next()) {
 				lvl = new Lvl();
+				lvl.setLvlPlayerId(rs.getInt("playerid"));
 				lvl.setLvlFloor(rs.getInt("floor"));
 				lvl.setLvlEvent(rs.getString("event"));
 				lvl.setLvlHPBonus(rs.getInt("hpBonus"));
@@ -89,11 +91,12 @@ public class LvlDAOImpl extends DAO implements LvlDAO {
 			connect();
 			
 			pstmt = conn.prepareStatement(INSERT);
-			pstmt.setInt(1, lvl.getLvlFloor());
-			pstmt.setString(2, lvl.getLvlEvent());
-			pstmt.setInt(3, lvl.getLvlHPBonus());
-			pstmt.setInt(4, lvl.getLvlATKBonus());
-			pstmt.setInt(5, lvl.getLvlDEFBonus());
+			pstmt.setInt(1, lvl.getLvlPlayerId());
+			pstmt.setInt(2, lvl.getLvlFloor());
+			pstmt.setString(3, lvl.getLvlEvent());
+			pstmt.setInt(4, lvl.getLvlHPBonus());
+			pstmt.setInt(5, lvl.getLvlATKBonus());
+			pstmt.setInt(6, lvl.getLvlDEFBonus());
 			
 			result = pstmt.executeUpdate();
 			
@@ -210,14 +213,14 @@ public class LvlDAOImpl extends DAO implements LvlDAO {
 //	}
 
 	@Override
-	public void lvlDelete(int floor) {
+	public void lvlDelete(int lvlPlayerId) {
 		//삭제
 		int result = 0;
 		try {
 			connect();
 			
 			pstmt = conn.prepareStatement(DELETE);
-			pstmt.setInt(1, floor);
+			pstmt.setInt(1, lvlPlayerId);
 			
 			result = pstmt.executeUpdate();
 			

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Player {
 	private int playerId;
-	private String playerName;
+	//private String playerName;
 	private int playerHP;
 	private int playerATK;
 	private int PlayerDEF;
@@ -24,15 +24,15 @@ public class Player {
 
 
 
-	public String getPlayerName() {
-		return playerName;
-	}
-
-
-
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
+//	public String getPlayerName() {
+//		return playerName;
+//	}
+//
+//
+//
+//	public void setPlayerName(String playerName) {
+//		this.playerName = playerName;
+//	}
 
 
 
@@ -67,7 +67,7 @@ public class Player {
 
 
 	public void setPlayerDEF(int playerDEF) {
-		PlayerDEF = playerDEF;
+		this.PlayerDEF = playerDEF;
 	}
 
 
@@ -110,7 +110,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player ID : " + playerId + ", Name : " + playerName + ", HP : " + playerHP 
+		return "Player ID : " + playerId +/* ", Name : " + playerName +*/ ", HP : " + playerHP 
 				+ ", ATK : "+ playerATK + ", DEF : " + PlayerDEF 
 				+ ", 현재 : " + playerFloor + " 층" /*+ ", 플레이 : " + PlayerCreDate
 				+ "~" + PlayerEndDate*/;

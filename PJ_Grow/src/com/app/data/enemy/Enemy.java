@@ -1,12 +1,20 @@
 package com.app.data.enemy;
 
 public class Enemy {
+	private int enemyPlayerId;
 	private int enemyId;
 	private String enemyName;
 	private int enemyHP;
 	private int enemyATK;
 	private int enemyDEF;
 	private int enemyFloor;
+	
+	public int getEnemyPlayerId() {
+		return enemyPlayerId;
+	}
+	public void setEnemyPlayerId(int enemyPlayerId) {
+		this.enemyPlayerId = enemyPlayerId;
+	}
 	
 	public int getEnemyId() {
 		return enemyId;
@@ -48,8 +56,9 @@ public class Enemy {
 	public String toString() {
 		return "Enemy ID : " + enemyId + ", Name : " + enemyName + ", HP : " + enemyHP 
 				+ ", ATK : " + enemyATK + ", DEF : " + enemyDEF 
-				+ ", 현재 : " + enemyFloor + " 층";
+				+ ", 현재 : " + enemyFloor + " 층" + ", 플레이어 : "+enemyPlayerId;
 	}
+	
 	
 	
 

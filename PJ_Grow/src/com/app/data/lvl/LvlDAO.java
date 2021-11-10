@@ -7,7 +7,7 @@ public interface LvlDAO {
 	public List<Lvl> lvlSelectAll();
 	
 	//현재층확인
-	public Lvl lvlSelect(int floor);
+	public Lvl lvlSelect(int lvlPlayerId);
 	
 	//등록
 	public int lvlInsert(Lvl lvl);
@@ -28,6 +28,6 @@ public interface LvlDAO {
 //	public int lvlDEFBonusUpdate(Lvl lvl);
 	
 	//삭제
-	void lvlDelete(int floor);
+	void lvlDelete(int lvlPlayerId);
 
 }

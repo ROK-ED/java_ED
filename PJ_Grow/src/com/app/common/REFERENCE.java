@@ -1,24 +1,18 @@
 package com.app.common;
+////////레코드 엔드데이터 
+// DROP TABLE lvl CASCADE CONSTRAINTS;  
 
 public class REFERENCE {
+	private final String INSERT = "insert into player values(?,?,?,?,?)";
 	
-	private final String SELECT_ALL = "select * from lvl order by floor";
-	private final String SELECT_ONE = "select * from lvl where floor = ?";
-	private final String INSERT = "insert into lvl values(?,?,?,?,?)";
-	private final String FLOOR_UPDATE = "update lvl set floor = ?";
-	private final String EVENT_UPDATE = "update lvl set event = ? where floor = ?";
-	private final String HPBONUS_UPDATE = "update lvl set hpBonus = ? where floor = ?";
-	private final String ATKBONUS_UPDATE = "update lvl set atkBonus = ? where floor = ?";
-	private final String DEFBONUS_UPDATE = "update lvl set defBonus = ? where floor = ?";
-	private final String DELETE = "delete from lvl where floor = ?";
     
 }    
-
+//Integer.parseInt(scanner.nextLine());
 /*	
 - 주제 : 층 오르는 텍스트 게임
 - 기능 : 최종으로 몇층까지 올라갔는지 확인, 선택하면 층마다 어떤 이벤트를 했는지도 확인가능 (sql read(selectAll))
-	   초기 캐릭터 설정 ~체력(나이), 공격력, 방어력 세가지 주사위 한번씩 랜덤으로 기본설정
-	   -레벨업x 적을 잡은 전리품과 아이템으로만 스펙변경
+	   초기 캐릭터 설정 ~체력, 공격력, 방어력 세가지 주사위 한번씩 랜덤으로 기본설정
+	   x-레벨업x 적을 잡은 전리품과 아이템으로만 스펙변경
 	   -체력이 0이 되면 종료//(체력을 sql update, delete로 더이상 delete 할것이 없으면 죽음)이건 무리
 	   기본적인 층 구조 (sql 틀만 create, 자료 update)
 	   -랜덤으로 이벤트 결정
@@ -34,7 +28,7 @@ public class REFERENCE {
 	   x-이름 (층수)층의 적,아이템 or sql 기록 데이터로 (sql read)
 	   x-체력, 공격력, 방어력 전부 올라가는 층수 기반
 	   전투
-	   주사위를 굴려 스펙에 보정치로 싸움 or 가위 바위 보(이걸로) 
+	   주사위를 굴려 스펙에 보정치로 싸움(이걸로) or 가위 바위 보 
 	   
 	   시작화면
 	   시작
@@ -54,44 +48,61 @@ try {
 
 
 
+create table acct(
+acctid VARCHAR2(20) primary key,
+acctpw VARCHAR2(20)
+);
+
+create table player(
+id NUMBER primary key,
+--name VARCHAR2(20),
+hp NUMBER,
+atk NUMBER,
+def NUMBER,
+nowfloor NUMBER 
+--CONSTRAINT FLR REFERENCES lvl(floor)
+);
+
 create table lvl(
-floor NUMBER primary key,
-event VARCHAR2(20),
+playerid NUMBER CONSTRAINT PID1 REFERENCES player(id),
+floor NUMBER 
+--primary key
+,event VARCHAR2(20),
 hpBonus NUMBER,
 atkBonus NUMBER,
 defBonus NUMBER);
 
-create table player(
-id NUMBER primary key,
-name VARCHAR2(20),
-hp NUMBER,
-atk NUMBER,
-def NUMBER,
-nowfloor NUMBER CONSTRAINT FLR REFERENCES lvl(floor));
+
 
 create table enemy(
-enemy_id NUMBER primary key,
+playerid NUMBER CONSTRAINT PID2 REFERENCES player(id),
+enemy_id NUMBER,
 enemy_name VARCHAR2(20),
 enemy_hp NUMBER,
 enemy_atk NUMBER,
 enemy_def NUMBER,
-nowfloor NUMBER CONSTRAINT FLR2 REFERENCES lvl(floor));
+nowfloor NUMBER 
+--CONSTRAINT FLR2 REFERENCES lvl(floor)
+);
 
 create table playrecord(
-playerid NUMBER CONSTRAINT PID REFERENCES player(id),
+playerid NUMBER CONSTRAINT PID3 REFERENCES player(id),
 playername VARCHAR2(20),
-lvlfloor NUMBER CONSTRAINT FLR3 REFERENCES lvl(floor),
-event VARCHAR2(20),
+lvlfloor NUMBER 
+--CONSTRAINT FLR3 REFERENCES lvl(floor)
+,event VARCHAR2(20),
 startDate DATE default sysdate,
 endDate DATE default sysdate,
-enemyid NUMBER CONSTRAINT EID REFERENCES enemy(enemy_id));
+enemyid NUMBER 
+--CONSTRAINT EID REFERENCES enemy(enemy_id)
+);
+
 
 drop table playrecord;
 drop table enemy;
-drop table playerstatus;
 drop table lvl;
-
-
+drop table player;
+drop table acct;
 
 
 

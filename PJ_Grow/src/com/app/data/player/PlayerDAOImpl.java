@@ -10,15 +10,15 @@ import oracle.sql.DATE;
 
 public class PlayerDAOImpl extends DAO implements PlayerDAO {
 	//사용할 SQL 정리
-	private final String SELECT_ALL = "select * from palyer order by id";
-	private final String SELECT_ONE = "select * from palyer where id = ?";
-	private final String INSERT = "insert into palyer values(?,?,?,?,?,?)";//?두개 삭제함
-    private final String HP_UPDATE = "update palyer set hp = ? where id = ?";
-    private final String ATK_UPDATE = "update palyer set atk = ? where id = ?";
-    private final String DEF_UPDATE = "update palyer set def = ? where id = ?";
-    private final String FLOOR_UPDATE = "update palyer set nowfloor = ? where id = ?";
+	private final String SELECT_ALL = "select * from player order by id";
+	private final String SELECT_ONE = "select * from player where id = ?";
+	private final String INSERT = "insert into player values(?,?,?,?,?)";//?세개 삭제함
+    private final String HP_UPDATE = "update player set hp = ? where id = ?";
+    private final String ATK_UPDATE = "update player set atk = ? where id = ?";
+    private final String DEF_UPDATE = "update player set def = ? where id = ?";
+    private final String FLOOR_UPDATE = "update player set nowfloor = ? where id = ?";
 //    private final String ENDDATE_UPDATE = "update palyerstatus set endDate = ? where id = ?";
-    private final String DELETE = "delete from palyer where id = ?";
+    private final String DELETE = "delete from player where id = ?";
 	
     //싱글톤
 	private static PlayerDAO instance = new PlayerDAOImpl();
@@ -39,7 +39,7 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 			while (rs.next()) {
 				Player player = new Player();
 				player.setPlayerId(rs.getInt("id"));
-				player.setPlayerName(rs.getString("name"));
+//				player.setPlayerName(rs.getString("name"));
 				player.setPlayerHP(rs.getInt("hp"));
 				player.setPlayerATK(rs.getInt("atk"));
 				player.setPlayerDEF(rs.getInt("def"));
@@ -72,11 +72,11 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 			if(rs.next()) {
 				player = new Player();
 				player.setPlayerId(rs.getInt("id"));
-				player.setPlayerName(rs.getString("name"));
+//				player.setPlayerName(rs.getString("name"));
 				player.setPlayerHP(rs.getInt("hp"));
 				player.setPlayerATK(rs.getInt("atk"));
 				player.setPlayerDEF(rs.getInt("def"));
-				player.setPlayerFloor(rs.getInt("floor"));
+				player.setPlayerFloor(rs.getInt("nowfloor"));
 //				playerStatus.setPlayerCreDate(rs.getDate("creationDate"));
 //				playerStatus.setPlayerEndDate(rs.getDate("endDate"));
 	    		}
@@ -98,11 +98,11 @@ public class PlayerDAOImpl extends DAO implements PlayerDAO {
 			
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setInt(1, player.getPlayerId());
-			pstmt.setString(2, player.getPlayerName());
-			pstmt.setInt(3, player.getPlayerHP());
-			pstmt.setInt(4, player.getPlayerATK());
-			pstmt.setInt(5, player.getPlayerDEF());
-			pstmt.setInt(6, player.getPlayerFloor());
+//			pstmt.setString(2, player.getPlayerName());
+			pstmt.setInt(2, player.getPlayerHP());
+			pstmt.setInt(3, player.getPlayerATK());
+			pstmt.setInt(4, player.getPlayerDEF());
+			pstmt.setInt(5, player.getPlayerFloor());
 //			pstmt.setDate(7, playerStatus.getPlayerCreDate());
 //			pstmt.setDate(8, playerStatus.getPlayerEndDate());
 			

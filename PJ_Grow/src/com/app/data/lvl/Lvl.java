@@ -1,11 +1,19 @@
 package com.app.data.lvl;
 
 public class Lvl {
+	private int lvlPlayerId;
 	private int lvlFloor;
 	private String lvlEvent;
 	private int lvlHPBonus;
 	private int lvlATKBonus;
 	private int lvlDEFBonus;
+	
+	public int getLvlPlayerId() {
+		return lvlPlayerId;
+	}
+	public void setLvlPlayerId(int lvlPlayerId) {
+		this.lvlPlayerId = lvlPlayerId;
+	}
 	
 	public int getLvlFloor() {
 		return lvlFloor;
@@ -41,8 +49,9 @@ public class Lvl {
 	public String toString() {
 		return "현재 : " + lvlFloor + " 층" +", 이벤트 : " + lvlEvent 
 				+ ", HPBonus : " + lvlHPBonus + ", ATKBonus : "+ lvlATKBonus
-				+ ", DEFBonus : " + lvlDEFBonus;
+				+ ", DEFBonus : " + lvlDEFBonus + ", 플레이어 : "+lvlPlayerId;
 	}
+	
 	
 	
 

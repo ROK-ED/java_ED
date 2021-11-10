@@ -14,7 +14,7 @@ public class RecordDAOImpl extends DAO implements RecordDAO {
 	// 사용할 SQL 정리
 	private final String SELECT_ALL = "select * from playrecord order by playerid";
 	private final String SELECT_ONE = "select * from playrecord where playerid = ?";
-	private final String INSERT = "insert into playrecord values(?,?,?,?,?,?,?)";
+	private final String INSERT = "insert into playrecord (playerid, playername, lvlfloor, event, enemyid) values(?,?,?,?,?)";
 	private final String DELETE = "delete from playrecord where playerid = ?";
 
 	// 싱글톤
@@ -96,9 +96,9 @@ public class RecordDAOImpl extends DAO implements RecordDAO {
 			pstmt.setString(2, record.getRecordPlayerName());
 			pstmt.setInt(3, record.getRecordLvlFloor());
 			pstmt.setString(4, record.getRecordEvent());
-			pstmt.setDate(5, record.getRecordStartDate());
-			pstmt.setDate(6, record.getRecordEndDate());
-			pstmt.setInt(7, record.getRecordEnemyId());
+//			pstmt.setDate(5, record.getRecordStartDate());
+//			pstmt.setDate(6, record.getRecordEndDate());
+			pstmt.setInt(5, record.getRecordEnemyId());
 
 			result = pstmt.executeUpdate();
 
