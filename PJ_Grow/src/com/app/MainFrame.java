@@ -392,8 +392,8 @@ public class MainFrame implements Frame {
 
 					if (fPlayer.getPlayerHP() <= 0) {
 						pdao.playerHPUpdate(fPlayer);
-						//System.out.println("YOU DIE");
-						break;
+						System.out.println("YOU DIE");
+						return;
 					}
 				}
 				System.out.println("적을 처치하였습니다.");
@@ -657,8 +657,8 @@ public class MainFrame implements Frame {
 
 						if (fPlayer.getPlayerHP() <= 0) {
 							pdao.playerHPUpdate(fPlayer);
-							//System.out.println("YOU DIE");
-							break;
+							System.out.println("YOU DIE");
+							return;
 						}
 					}
 					System.out.println("적을 처치하였습니다.");
