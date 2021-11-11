@@ -376,11 +376,11 @@ public class MainFrame implements Frame {
 								- (playerDoubleDice + fPlayer.getPlayerDEF())));
 					} else if (playerDoubleDice > enemyDoubleDice) {
 						System.out.println("공격합니다.");
-						fEnemy.setEnemyHP(fEnemy.getEnemyHP() - mZ((playerDoubleDice + fPlayer.getPlayerATK())
+						fEnemy.setEnemyHP(fEnemy.getEnemyHP()-(playerDoubleDice-enemyDoubleDice) - mZ((playerDoubleDice + fPlayer.getPlayerATK())
 								- (enemyDoubleDice + fEnemy.getEnemyDEF())));
 					} else if (playerDoubleDice < enemyDoubleDice) {
 						System.out.println("방어합니다.");
-						fPlayer.setPlayerHP(fPlayer.getPlayerHP() - mZ((enemyDoubleDice + fEnemy.getEnemyATK())
+						fPlayer.setPlayerHP(fPlayer.getPlayerHP()-(enemyDoubleDice-playerDoubleDice) - mZ((enemyDoubleDice + fEnemy.getEnemyATK())
 								- (playerDoubleDice + fPlayer.getPlayerDEF())));
 					}
 					System.out.println("Enter");
@@ -641,11 +641,11 @@ public class MainFrame implements Frame {
 									- (playerDoubleDice + fPlayer.getPlayerDEF())));
 						} else if (playerDoubleDice > enemyDoubleDice) {
 							System.out.println("공격합니다.");
-							fEnemy.setEnemyHP(fEnemy.getEnemyHP() - mZ((playerDoubleDice + fPlayer.getPlayerATK())
+							fEnemy.setEnemyHP(fEnemy.getEnemyHP()-(playerDoubleDice-enemyDoubleDice) - mZ((playerDoubleDice + fPlayer.getPlayerATK())
 									- (enemyDoubleDice + fEnemy.getEnemyDEF())));
 						} else if (playerDoubleDice < enemyDoubleDice) {
 							System.out.println("방어합니다.");
-							fPlayer.setPlayerHP(fPlayer.getPlayerHP() - mZ((enemyDoubleDice + fEnemy.getEnemyATK())
+							fPlayer.setPlayerHP(fPlayer.getPlayerHP()-(enemyDoubleDice-playerDoubleDice) - mZ((enemyDoubleDice + fEnemy.getEnemyATK())
 									- (playerDoubleDice + fPlayer.getPlayerDEF())));
 						}
 						System.out.println("Enter");
