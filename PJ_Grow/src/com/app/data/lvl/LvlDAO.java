@@ -12,20 +12,20 @@ public interface LvlDAO {
 	//등록
 	public int lvlInsert(Lvl lvl);
 	
-//	//수정 : floor
-//	public int lvlFloorUpdate(Lvl lvl);
-//	
-//	//수정 : event
-//	public void lvlEventUpdate(Lvl lvl);
-//	
-//	//수정 : HPBonus
-//	public int lvlHPBonusUpdate(Lvl lvl);
-//	
-//	//수정 : ATKBonus
-//	public int lvlATKBonusUpdate(Lvl lvl);
-//	
-//	//수정 : DEFBonus
-//	public int lvlDEFBonusUpdate(Lvl lvl);
+	//수정 : floor
+	public int lvlFloorUpdate(Lvl lvl);
+	
+	//수정 : event
+	public void lvlEventUpdate(Lvl lvl);
+	
+	//수정 : HPBonus
+	public int lvlHPBonusUpdate(Lvl lvl);
+	
+	//수정 : ATKBonus
+	public int lvlATKBonusUpdate(Lvl lvl);
+	
+	//수정 : DEFBonus
+	public int lvlDEFBonusUpdate(Lvl lvl);
 	
 	//삭제
 	void lvlDelete(int lvlPlayerId);

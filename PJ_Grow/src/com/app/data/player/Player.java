@@ -110,7 +110,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player ID : " + playerId +/* ", Name : " + playerName +*/ ", HP : " + playerHP 
+		return "Player CODE : " + playerId +/* ", Name : " + playerName +*/ ", HP : " + playerHP 
 				+ ", ATK : "+ playerATK + ", DEF : " + PlayerDEF 
 				+ ", 현재 : " + playerFloor + " 층" /*+ ", 플레이 : " + PlayerCreDate
 				+ "~" + PlayerEndDate*/;

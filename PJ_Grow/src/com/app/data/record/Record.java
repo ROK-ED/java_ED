@@ -102,7 +102,7 @@ public class Record {
 	public String toString() {
 		return "Player ID : " + recordPlayerId + ", NAME : " + recordPlayerName
 				+ ", 층수 : " + recordLvlFloor + ", 이벤트 : " + recordEvent 
-				+ ", 시작 : " + recordStartDate + ", 끝 : " + recordEndDate 
+				//+ ", 시작 : " + recordStartDate + ", 끝 : " + recordEndDate 
 				+ ", 처치수 : " + recordEnemyId;
 	}
 	

@@ -25,9 +25,9 @@ public class REFERENCE {
 	   -적~내면 시작치 전부 내면의 체력은 층수로 고정 공1,방0 층수올라가면서 층수 스텟 기반 랜덤으로 능력시 변경
 	      ~적 처치시 주사위 수치로 능력치 랜덤 성장
 	   x-아이템 획득 ~ 체력, 공격력, 방어력 UP
-	   -수련 ~ 체력, 공격력, 방어력 UP / 내면은 오른 수치의 반만 성장
-	   -함정 ~주사위 자신 체력, 공격력, 방어력 DOWN, 내면 UP
-	   -휴식 ~주사위 체력up, 내면 스텟 DOWN 
+	   -수련 ~ 체력, 공격력, 방어력 UP / 내면은 오른 수치만큼 dewn 성장
+	   -함정 ~주사위 자신 체력, 공격력, 방어력 DOWN, 내면 UP 
+	   -휴식 ~주사위 체력up 
 	   x적,아이템 데이터 
 	   x-이름 (층수)층의 적,아이템 or sql 기록 데이터로 (sql read)
 	   x-체력, 공격력, 방어력 전부 올라가는 층수 기반
@@ -48,6 +48,19 @@ try {
 } finally {
 	disconnect();
 }	   
+
+
+create table acct(acctid VARCHAR2(20) primary key,acctpw VARCHAR2(20));
+create table player(id NUMBER primary key,hp NUMBER,atk NUMBER,def NUMBER,nowfloor NUMBER );
+create table lvl(playerid NUMBER,floor NUMBER ,event VARCHAR2(20),hpBonus NUMBER,atkBonus NUMBER,defBonus NUMBER);
+create table enemy(playerid NUMBER,enemy_id NUMBER,enemy_name VARCHAR2(20),enemy_hp NUMBER,enemy_atk NUMBER,enemy_def NUMBER,nowfloor NUMBER );
+create table playrecord(playerid NUMBER,playername VARCHAR2(20),lvlfloor NUMBER ,event VARCHAR2(20),startDate DATE default sysdate,endDate DATE default sysdate,enemyid NUMBER );
+
+drop table playrecord;
+drop table enemy;
+drop table lvl;
+drop table player;
+drop table acct;
 
 create table acct(acctid VARCHAR2(20) primary key,acctpw VARCHAR2(20));
 create table player(id NUMBER primary key,hp NUMBER,atk NUMBER,def NUMBER,nowfloor NUMBER );
