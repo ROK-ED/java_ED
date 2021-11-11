@@ -485,7 +485,7 @@ public class MainFrame implements Frame {
 				}else if(room ==2) {
 					//수련 ~ 체력, 공격력, 방어력 UP / 내면은 오른 수치만큼 dewn 성장
 					floor = fLvl.getLvlFloor();
-					System.out.println(floor+"층 에서 휴식을 취합니다.");
+					System.out.println(floor+"층 에서 수련을 합니다.");
 					System.out.println("주사위를 돌려 각 능력치를 상승시킵니다.");
 					System.out.println("Enter");
 					System.out.println(scanner.nextLine());
